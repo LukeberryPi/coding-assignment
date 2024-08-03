@@ -1,50 +1,35 @@
 import { Link, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import "../styles/header.scss";
 
-const Header = ({ searchMovies }) => {
-  const { starredMovies } = useSelector((state) => state.starred);
-
+const Header = ({ setSearchParams }) => {
   return (
     <header>
-      <Link to="/" data-testid="home" onClick={() => searchMovies("")}>
-        <i className="bi bi-film" />
-      </Link>
-
       <nav>
-        <NavLink
-          to="/starred"
-          data-testid="nav-starred"
-          className="nav-starred"
-        >
-          {starredMovies.length > 0 ? (
-            <>
-              <i className="bi bi-star-fill bi-star-fill-white" />
-              <sup className="star-number">{starredMovies.length}</sup>
-            </>
-          ) : (
-            <i className="bi bi-star" />
-          )}
-        </NavLink>
-        <NavLink to="/watch-later" className="nav-fav">
-          watch later
-        </NavLink>
-      </nav>
-
-      <div className="input-group rounded">
-        <Link to="/" onClick={(e) => searchMovies("")} className="search-link">
-          <input
-            type="search"
-            data-testid="search-movies"
-            onKeyUp={(e) => searchMovies(e.target.value)}
-            className="form-control rounded"
-            placeholder="Search movies..."
-            aria-label="Search movies"
-            aria-describedby="search-addon"
-          />
+        <Link to="/" data-testid="home" className="nav-link">
+          <i className="bi bi-film" />
+          Movieland
         </Link>
-      </div>
+
+        <input
+          type="search"
+          data-testid="search-movies"
+          onChange={(e) => setSearchParams(e.target.value)}
+          placeholder="Search movies..."
+          aria-label="Search movies"
+        />
+
+        <div className="nav-link-container">
+          <NavLink className="nav-link" to="/starred" data-testid="nav-starred">
+            <i className="bi bi-star" />
+            Favorites
+          </NavLink>
+          <NavLink className="nav-link" to="/watch-later" data-testid="nav-watch-later">
+            <i className="bi bi-clock" />
+            Watch Later
+          </NavLink>
+        </div>
+      </nav>
     </header>
   );
 };
