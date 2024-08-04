@@ -1,7 +1,6 @@
 header {
   position: fixed;
   width: 100%;
-  color: #fff;
 
   nav {
     padding: 1rem 2rem;
@@ -26,8 +25,7 @@ header {
     max-width: 400px;
     padding: 0.5rem 1rem;
     border-radius: 1rem;
-    border: 2px solid #ccc;
-    outline: none;
+    outline: 2px solid #ccc;
 
 
     &:focus {

@@ -13,7 +13,8 @@ export const moviesMock = [
     poster_path: "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
     release_date: "2014-11-05",
     title: "Interstellar",
-  },{
+  },
+  {
     id: "27205",
     overview:
       "Cobb, a skilled thief who commits corporate espionage by infiltrating...",
@@ -27,7 +28,8 @@ export const moviesMock = [
     poster_path: "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
     release_date: "2014-11-05",
     title: "Interstellar",
-  },{
+  },
+  {
     id: "27205",
     overview:
       "Cobb, a skilled thief who commits corporate espionage by infiltrating...",
@@ -41,7 +43,8 @@ export const moviesMock = [
     poster_path: "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
     release_date: "2014-11-05",
     title: "Interstellar",
-  },{
+  },
+  {
     id: "27205",
     overview:
       "Cobb, a skilled thief who commits corporate espionage by infiltrating...",
@@ -55,7 +58,8 @@ export const moviesMock = [
     poster_path: "/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
     release_date: "2014-11-05",
     title: "Interstellar",
-  },{
+  },
+  {
     id: "27205",
     overview:
       "Cobb, a skilled thief who commits corporate espionage by infiltrating...",
