@@ -1,4 +1,4 @@
-const Movie = ({ movie }) => {
+const MovieCard = ({ movie }) => {
   const { id, overview, poster_path, release_date, title } = movie;
 
   const getImageURL = (poster_path) => {
@@ -35,4 +35,4 @@ const Movie = ({ movie }) => {
   );
 };
 
-export default Movie;
+export default MovieCard;

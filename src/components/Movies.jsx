@@ -1,11 +1,11 @@
-import Movie from "./Movie";
+import MovieCard from "./MovieCard";
 import "../styles/movies.scss";
 
 const Movies = ({ movies }) => {
   return (
     <div className="movies-grid">
       {movies.map((movie) => (
-        <Movie key={movie.id} movie={movie} />
+        <MovieCard key={movie.id} movie={movie} />
       ))}
     </div>
   );

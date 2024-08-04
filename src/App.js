@@ -11,6 +11,7 @@ import Movies from "./components/Movies";
 import Starred from "./components/Starred";
 import WatchLater from "./components/WatchLater";
 import { moviesMock } from "./test/movies.mocks";
+import "./app.scss";
 
 const App = () => {
   const [searchParams] = useSearchParams();
@@ -36,13 +37,15 @@ const App = () => {
   return (
     <>
       <Header searchMovies={searchMovies} />
-      <Routes>
-        <Route path="/" element={<Movies movies={movies} />} />
-        <Route path="/search" element={<Movies movies={movies} />} />
-        <Route path="/starred" element={<Starred movies={movies} />} />
-        <Route path="/watch-later" element={<WatchLater movies={movies} />} />
-        <Route path="*" element={<h1>Page Not Found</h1>} />
-      </Routes>
+      <main className="main">
+        <Routes>
+          <Route path="/" element={<Movies movies={movies} />} />
+          <Route path="/search" element={<Movies movies={movies} />} />
+          <Route path="/starred" element={<Starred movies={movies} />} />
+          <Route path="/watch-later" element={<WatchLater movies={movies} />} />
+          <Route path="*" element={<h1>Page Not Found</h1>} />
+        </Routes>
+      </main>
     </>
   );
 };
