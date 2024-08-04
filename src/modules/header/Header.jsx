@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 
-import "../styles/header.scss";
+import "./header.scss";
 
 const Header = ({ searchMovies }) => {
   return (
@@ -17,6 +17,7 @@ const Header = ({ searchMovies }) => {
           onChange={(e) => searchMovies(e.target.value)}
           placeholder="Search movies..."
           aria-label="Search movies"
+          aria-labelledby="search-movies"
         />
 
         <div className="nav-link-container">
@@ -24,7 +25,11 @@ const Header = ({ searchMovies }) => {
             <i className="bi bi-star" />
             Favorites
           </NavLink>
-          <NavLink className="nav-link" to="/watch-later" data-testid="nav-watch-later">
+          <NavLink
+            className="nav-link"
+            to="/watch-later"
+            data-testid="nav-watch-later"
+          >
             <i className="bi bi-clock" />
             Watch Later
           </NavLink>

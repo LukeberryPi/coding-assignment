@@ -6,9 +6,9 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
-import Header from "./components/Header";
-import MovieGrid from "./components/MovieGrid";
-import { moviesMock } from "./test/movies.mocks";
+import Header from "./modules/header/Header.jsx";
+import MovieGrid from "./shared/components/movieGrid/MovieGrid.jsx";
+import { moviesMock } from "./shared/movies.mocks.js";
 import "./app.scss";
 
 const App = () => {
