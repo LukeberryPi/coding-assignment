@@ -1,33 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   Routes,
   Route,
-  createSearchParams,
   useSearchParams,
+  useNavigate,
+  useLocation,
 } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import "reactjs-popup/dist/index.css";
-import { fetchMovies } from "./data/moviesSlice";
-import { ENDPOINT_SEARCH, ENDPOINT_DISCOVER } from "./constants";
 import Header from "./components/Header";
 import Movies from "./components/Movies";
 import Starred from "./components/Starred";
 import WatchLater from "./components/WatchLater";
-// import YouTubePlayer from "./components/YoutubePlayer";
 import "./app.scss";
 import { moviesMock } from "./test/movies.mocks";
 
 const App = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const searchQuery = searchParams.get("search");
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const searchQuery = searchParams.get("q");
   const movies = moviesMock;
 
   useEffect(() => {
-    setSearchParams(createSearchParams({ search: searchQuery }));
-  }, []);
+    if (searchQuery && location.pathname !== "/search") {
+      navigate(`/search?q=${searchQuery}`);
+    }
+  }, [searchQuery, navigate, location.pathname]);
 
   const searchMovies = (query) => {
-    console.log(query);
+    if (query) {
+      navigate(`/search?q=${encodeURIComponent(query)}`);
+    } else {
+      navigate("/");
+    }
   };
 
   const viewTrailer = () => {
@@ -40,27 +45,28 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header
-        searchMovies={searchMovies}
-        searchParams={searchParams}
-        setSearchParams={setSearchParams}
-      />
-
+      <Header searchMovies={searchMovies} />
       <div>
-        {/* {videoKey ? (
-          <YouTubePlayer videoKey={videoKey} />
-        ) : (
-          <div style={{ padding: "30px" }}>
-            <h6>no trailer available. Try another movie</h6>
-          </div>
-        )} */}
-
         <Routes>
           <Route
             path="/"
             element={
               <Movies
                 movies={movies}
+                viewTrailer={viewTrailer}
+                closeCard={closeCard}
+              />
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <Movies
+                movies={movies.filter((movie) =>
+                  movie.title
+                    .toLowerCase()
+                    .includes(searchQuery?.toLowerCase() || ""),
+                )}
                 viewTrailer={viewTrailer}
                 closeCard={closeCard}
               />

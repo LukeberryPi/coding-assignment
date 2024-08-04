@@ -2,11 +2,11 @@ import { Link, NavLink } from "react-router-dom";
 
 import "../styles/header.scss";
 
-const Header = ({ setSearchParams }) => {
+const Header = ({ searchMovies }) => {
   return (
     <header>
       <nav>
-        <Link to="/" data-testid="home" className="nav-link">
+        <Link to="/" data-testid="logo-button" className="nav-link">
           <i className="bi bi-film" />
           Movieland
         </Link>
@@ -14,7 +14,7 @@ const Header = ({ setSearchParams }) => {
         <input
           type="search"
           data-testid="search-movies"
-          onChange={(e) => setSearchParams(e.target.value)}
+          onChange={(e) => searchMovies(e.target.value)}
           placeholder="Search movies..."
           aria-label="Search movies"
         />
