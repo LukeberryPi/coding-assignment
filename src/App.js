@@ -6,12 +6,10 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
-import "reactjs-popup/dist/index.css";
 import Header from "./components/Header";
 import Movies from "./components/Movies";
 import Starred from "./components/Starred";
 import WatchLater from "./components/WatchLater";
-import "./app.scss";
 import { moviesMock } from "./test/movies.mocks";
 
 const App = () => {
@@ -35,58 +33,17 @@ const App = () => {
     }
   };
 
-  const viewTrailer = () => {
-    console.log("view trailer");
-  };
-
-  const closeCard = () => {
-    console.log("close card");
-  };
-
   return (
-    <div className="App">
+    <>
       <Header searchMovies={searchMovies} />
-      <div>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Movies
-                movies={movies}
-                viewTrailer={viewTrailer}
-                closeCard={closeCard}
-              />
-            }
-          />
-          <Route
-            path="/search"
-            element={
-              <Movies
-                movies={movies.filter((movie) =>
-                  movie.title
-                    .toLowerCase()
-                    .includes(searchQuery?.toLowerCase() || ""),
-                )}
-                viewTrailer={viewTrailer}
-                closeCard={closeCard}
-              />
-            }
-          />
-          <Route
-            path="/starred"
-            element={<Starred viewTrailer={viewTrailer} />}
-          />
-          <Route
-            path="/watch-later"
-            element={<WatchLater viewTrailer={viewTrailer} />}
-          />
-          <Route
-            path="*"
-            element={<h1 className="not-found">Page Not Found</h1>}
-          />
-        </Routes>
-      </div>
-    </div>
+      <Routes>
+        <Route path="/" element={<Movies movies={movies} />} />
+        <Route path="/search" element={<Movies movies={movies} />} />
+        <Route path="/starred" element={<Starred movies={movies} />} />
+        <Route path="/watch-later" element={<WatchLater movies={movies} />} />
+        <Route path="*" element={<h1>Page Not Found</h1>} />
+      </Routes>
+    </>
   );
 };
 
