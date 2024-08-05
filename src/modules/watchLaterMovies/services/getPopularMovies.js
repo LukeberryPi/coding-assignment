@@ -1,3 +1,5 @@
+import { API_URL } from "../../../shared/utils/constants";
+
 const getPopularMovies = async (pageParam = 1) => {
   const response = await fetch(
     `${API_URL}/discover/movie?include_adult=false&page=${pageParam}&sort_by=popularity.desc`,

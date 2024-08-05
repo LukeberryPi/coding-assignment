@@ -1,4 +1,8 @@
-import { ACCOUNT_ID, API_URL, BEARER_TOKEN } from "../../utils/constants";
+import {
+  ACCOUNT_ID,
+  API_URL,
+  BEARER_TOKEN,
+} from "../../../shared/utils/constants";
 
 const url = `${API_URL}/account/${ACCOUNT_ID}/favorite`;
 const options = {
@@ -16,7 +20,7 @@ const addfavoriteMovie = async (movieId) => {
     body: JSON.stringify({
       media_type: "movie",
       media_id: movieId,
-      favorite: false,
+      favorite: true,
     }),
   });
 };

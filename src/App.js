@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
   Routes,
@@ -9,9 +10,8 @@ import {
 import Header from "./modules/header/Header.jsx";
 import MovieGrid from "./shared/components/movieGrid/MovieGrid.jsx";
 import { moviesMock } from "./shared/movies.mocks.js";
-import "./app.scss";
-import { useDispatch, useSelector } from "react-redux";
 import { getPopularMovies } from "./data/moviesSlice";
+import "./app.scss";
 
 const App = () => {
   const dispatch = useDispatch();

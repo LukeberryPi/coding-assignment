@@ -1,4 +1,8 @@
-import { ACCOUNT_ID, API_URL, BEARER_TOKEN } from "../../utils/constants";
+import {
+  ACCOUNT_ID,
+  API_URL,
+  BEARER_TOKEN,
+} from "../../../shared/utils/constants";
 
 const getfavoriteMovies = async (pageParam = 1) => {
   const response = await fetch(
