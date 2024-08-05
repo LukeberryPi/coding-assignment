@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import moviesSlice from "../../data/moviesSlice";
-import starredSlice from "../data/starredSlice";
+import favoriteSlice from "../data/favoriteSlice";
 import watchLaterSlice from "../../modules/watch-later/watchLaterSlice";
 
 export function renderWithProviders(
@@ -15,7 +15,7 @@ export function renderWithProviders(
     store = configureStore({
       reducer: {
         movies: moviesSlice.reducer,
-        favorite: starredSlice.reducer,
+        favorite: favoriteSlice.reducer,
         watchLater: watchLaterSlice.reducer,
       },
       preloadedState,

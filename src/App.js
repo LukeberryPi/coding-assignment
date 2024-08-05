@@ -22,7 +22,7 @@ const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const starredMovies = moviesMock;
+  const favoriteMovies = moviesMock;
   const watchLaterMovies = moviesMock;
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const App = () => {
               <MovieGrid
                 title={`Search: ${searchQuery}`}
                 emptyStateMessage="No movies matched your search. Try searching for something else."
-                movies={starredMovies}
+                movies={favoriteMovies}
               />
             }
           />
@@ -80,9 +80,9 @@ const App = () => {
             path="/favorite"
             element={
               <MovieGrid
-                title="Starred Movies"
-                emptyStateMessage="You have no Starred Movies. You can star movies on the home page."
-                movies={starredMovies}
+                title="Favorite Movies"
+                emptyStateMessage="You have no Favorite Movies. You can star movies on the home page."
+                movies={favoriteMovies}
               />
             }
           />

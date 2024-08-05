@@ -6,7 +6,7 @@ const Header = ({ searchMovies }) => {
   return (
     <header>
       <nav>
-        <Link to="/" data-testid="logo-button" className="nav-link">
+        <Link to="/" className="nav-link">
           <div>
             <i className="bi bi-film h2" />
           </div>
@@ -15,7 +15,6 @@ const Header = ({ searchMovies }) => {
 
         <input
           type="search"
-          data-testid="search-movies"
           onChange={(e) => searchMovies(e.target.value)}
           placeholder="Search movies..."
           aria-label="Search movies"
@@ -23,19 +22,11 @@ const Header = ({ searchMovies }) => {
         />
 
         <div className="nav-link-container">
-          <NavLink
-            className="nav-link"
-            to="/favorite"
-            data-testid="nav-favorite"
-          >
+          <NavLink className="nav-link" to="/favorite">
             <i className="bi bi-star" />
             Favorites
           </NavLink>
-          <NavLink
-            className="nav-link"
-            to="/watch-later"
-            data-testid="nav-watch-later"
-          >
+          <NavLink className="nav-link" to="/watch-later">
             <i className="bi bi-clock" />
             Watch Later
           </NavLink>

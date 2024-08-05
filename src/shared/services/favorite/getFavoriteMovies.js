@@ -1,6 +1,6 @@
 import { ACCOUNT_ID, API_URL, BEARER_TOKEN } from "../../utils/constants";
 
-const getStarredMovies = async (pageParam = 1) => {
+const getfavoriteMovies = async (pageParam = 1) => {
   const response = await fetch(
     `${API_URL}/account/${ACCOUNT_ID}/favorite/movies?page=${pageParam}`,
     {
@@ -14,4 +14,4 @@ const getStarredMovies = async (pageParam = 1) => {
   return data.results;
 };
 
-export default getStarredMovies;
+export default getfavoriteMovies;

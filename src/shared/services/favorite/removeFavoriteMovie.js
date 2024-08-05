@@ -10,7 +10,7 @@ const options = {
   },
 };
 
-const addStarredMovie = async (movieId) => {
+const addfavoriteMovie = async (movieId) => {
   await fetch(url, {
     options,
     body: JSON.stringify({
@@ -21,4 +21,4 @@ const addStarredMovie = async (movieId) => {
   });
 };
 
-export default addStarredMovie;
+export default addfavoriteMovie;

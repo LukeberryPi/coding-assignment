@@ -1,24 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const starredSlice = createSlice({
+const favoriteSlice = createSlice({
   name: "favorite",
   initialState: {
-    starredMovies: [],
+    favoriteMovies: [],
   },
   reducers: {
     starMovie: (state, action) => {
-      state.starredMovies = [action.payload, ...state.starredMovies];
+      state.favoriteMovies = [action.payload, ...state.favoriteMovies];
     },
     unstarMovie: (state, action) => {
-      const indexOfId = state.starredMovies.findIndex(
+      const indexOfId = state.favoriteMovies.findIndex(
         (key) => key.id === action.payload.id,
       );
-      state.starredMovies.splice(indexOfId, 1);
+      state.favoriteMovies.splice(indexOfId, 1);
     },
-    clearAllStarred: (state) => {
-      state.starredMovies = [];
+    clearAllFavorites: (state) => {
+      state.favoriteMovies = [];
     },
   },
 });
 
-export default starredSlice;
+export default favoriteSlice;
