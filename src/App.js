@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Routes,
   Route,
@@ -10,6 +10,7 @@ import Header from "./modules/header/Header.jsx";
 import MovieGrid from "./shared/components/movieGrid/MovieGrid.jsx";
 import { moviesMock } from "./shared/movies.mocks.js";
 import "./app.scss";
+import getPopularMovies from "./shared/services/getPopularMovies.js";
 
 const App = () => {
   const [searchParams] = useSearchParams();
@@ -19,6 +20,8 @@ const App = () => {
   const movies = moviesMock;
   const starredMovies = moviesMock;
   const watchLaterMovies = moviesMock;
+
+  const [popularMovies, setPopularMovies] = useState([]);
 
   useEffect(() => {
     if (searchQuery && location.pathname !== "/search") {
@@ -34,6 +37,19 @@ const App = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchPopularMovies = async () => {
+      try {
+        const movies = await getPopularMovies();
+        setPopularMovies(movies);
+      } catch (error) {
+        console.error("Failed to fetch popular movies:", error);
+      }
+    };
+
+    fetchPopularMovies();
+  }, []);
+
   return (
     <>
       <Header searchMovies={searchMovies} />
@@ -45,7 +61,7 @@ const App = () => {
               <MovieGrid
                 title="Popular Movies"
                 emptyStateMessage="There are no popular movies to show."
-                movies={movies}
+                movies={popularMovies}
               />
             }
           />

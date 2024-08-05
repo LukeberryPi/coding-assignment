@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
 
-export const EmptyState = ({ message }) => {
+export const EmptyState = ({ message, goToHome = true }) => {
   return (
     <div className="empty-state">
       <p>{message}</p>
-      <Link className="go-home-anchor" to="/">Go to home page</Link>
+      {!!goToHome && (
+        <Link className="go-home-anchor" to="/">
+          Go to home page
+        </Link>
+      )}
     </div>
   );
 };

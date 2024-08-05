@@ -1,6 +1,6 @@
 import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { renderWithProviders } from "./shared/utils/renderWithProviders";
+import { renderWithProviders } from "./shared/utils/renderWithProviders.js";
 import App from "./App";
 
 it("renders watch later link", () => {
