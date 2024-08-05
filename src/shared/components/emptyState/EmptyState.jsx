@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import "./empty-state.scss";
 
 export const EmptyState = ({ message, goToHome = true }) => {
   return (
-    <div className="empty-state">
+    <div className="empty-state-container">
       <p>{message}</p>
       {!!goToHome && (
         <Link className="go-home-anchor" to="/">
