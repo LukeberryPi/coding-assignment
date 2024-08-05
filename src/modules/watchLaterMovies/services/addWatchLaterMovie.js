@@ -1,4 +1,8 @@
-import { ACCOUNT_ID, API_URL, BEARER_TOKEN } from "../../utils/constants";
+import {
+  ACCOUNT_ID,
+  API_URL,
+  BEARER_TOKEN,
+} from "../../../shared/utils/constants";
 
 const url = `${API_URL}/account/${ACCOUNT_ID}/watchlist`;
 const options = {

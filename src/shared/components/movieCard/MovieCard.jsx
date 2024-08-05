@@ -29,7 +29,14 @@ const MovieCard = ({ movie }) => {
         src={getImageURL(poster_path)}
         alt="movie poster"
       />
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexGrow: 1 }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexGrow: 1,
+        }}
+      >
         <p style={{ color: "black" }}>{title}</p>
       </div>
       <div

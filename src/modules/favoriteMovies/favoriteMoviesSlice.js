@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { ACCOUNT_ID, API_URL, BEARER_TOKEN } from "../../shared/utils/constants";
+
+import {
+  ACCOUNT_ID,
+  API_URL,
+  BEARER_TOKEN,
+} from "../../shared/utils/constants";
 
 const url = `${API_URL}/account/${ACCOUNT_ID}/favorite`;
 const options = {

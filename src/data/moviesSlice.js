@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
 import { API_URL } from "../shared/utils/constants";
 
 export const getPopularMovies = createAsyncThunk(

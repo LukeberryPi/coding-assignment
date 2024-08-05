@@ -1,5 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
 import {
   Routes,
   Route,
@@ -7,10 +8,11 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
+
+import { getPopularMovies } from "./data/moviesSlice";
 import Header from "./modules/header/Header.jsx";
 import MovieGrid from "./shared/components/movieGrid/MovieGrid.jsx";
 import { moviesMock } from "./shared/movies.mocks.js";
-import { getPopularMovies } from "./data/moviesSlice";
 import "./app.scss";
 
 const App = () => {

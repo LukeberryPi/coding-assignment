@@ -18,7 +18,10 @@ const TrailerModal = ({ youtubeVideoId, isOpen, onClose }) => {
       open={isOpen}
     >
       <div style={{ display: "flex", justifyContent: "end" }}>
-        <button onClick={onClose} style={{ backgroundColor: "transparent", border: "none" }}>
+        <button
+          onClick={onClose}
+          style={{ backgroundColor: "transparent", border: "none" }}
+        >
           <i className="bi bi-x h3" />
         </button>
       </div>
