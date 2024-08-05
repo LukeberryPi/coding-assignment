@@ -21,7 +21,11 @@ const Header = ({ searchMovies }) => {
         />
 
         <div className="nav-link-container">
-          <NavLink className="nav-link" to="/starred" data-testid="nav-starred">
+          <NavLink
+            className="nav-link"
+            to="/favorite"
+            data-testid="nav-favorite"
+          >
             <i className="bi bi-star" />
             Favorites
           </NavLink>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   Routes,
   Route,
@@ -10,18 +10,24 @@ import Header from "./modules/header/Header.jsx";
 import MovieGrid from "./shared/components/movieGrid/MovieGrid.jsx";
 import { moviesMock } from "./shared/movies.mocks.js";
 import "./app.scss";
-import getPopularMovies from "./shared/services/getPopularMovies.js";
+import { useDispatch, useSelector } from "react-redux";
+import { getPopularMovies } from "./data/moviesSlice";
 
 const App = () => {
+  const dispatch = useDispatch();
+  const { movies, status, error } = useSelector((state) => state.popularMovies);
+
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const location = useLocation();
   const searchQuery = searchParams.get("q");
-  const movies = moviesMock;
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const starredMovies = moviesMock;
   const watchLaterMovies = moviesMock;
 
-  const [popularMovies, setPopularMovies] = useState([]);
+  useEffect(() => {
+    dispatch(getPopularMovies());
+  }, [dispatch]);
 
   useEffect(() => {
     if (searchQuery && location.pathname !== "/search") {
@@ -37,18 +43,13 @@ const App = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchPopularMovies = async () => {
-      try {
-        const movies = await getPopularMovies();
-        setPopularMovies(movies);
-      } catch (error) {
-        console.error("Failed to fetch popular movies:", error);
-      }
-    };
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
 
-    fetchPopularMovies();
-  }, []);
+  if (status === "failed") {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <>
@@ -61,7 +62,7 @@ const App = () => {
               <MovieGrid
                 title="Popular Movies"
                 emptyStateMessage="There are no popular movies to show."
-                movies={popularMovies}
+                movies={movies}
               />
             }
           />
@@ -71,12 +72,12 @@ const App = () => {
               <MovieGrid
                 title={`Search: ${searchQuery}`}
                 emptyStateMessage="No movies matched your search. Try searching for something else."
-                movies={movies}
+                movies={starredMovies}
               />
             }
           />
           <Route
-            path="/starred"
+            path="/favorite"
             element={
               <MovieGrid
                 title="Starred Movies"

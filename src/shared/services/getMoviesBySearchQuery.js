@@ -1,14 +1,9 @@
 const getMoviesBySearchQuery = async (query, pageParam = 1) => {
-  const url = `${process.env.REACT_APP_API_URL}/search/movie?query=${query}&page=${pageParam}`;
-  const response = await fetch(url, {
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${process.env.REACT_APP_BEARER_TOKEN}`,
-    },
-  });
+  const response = await fetch(
+    `${API_URL}/movie?query=${query}&page=${pageParam}`,
+  );
   const data = await response.json();
-
-  return data;
+  return data.results;
 };
 
 export default getMoviesBySearchQuery;

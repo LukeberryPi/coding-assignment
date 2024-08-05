@@ -11,14 +11,14 @@ describe("starredSlice test", () => {
     expect(result).toEqual({ starredMovies: [] });
   });
 
-  it("should add movie to starred", () => {
+  it("should add movie to favorite", () => {
     const initialState = { ...state, starredMovies: [] };
     const action = starredSlice.actions.starMovie(moviesMock[0]);
     const result = starredSlice.reducer(initialState, action);
     expect(result.starredMovies[0]).toBe(moviesMock[0]);
   });
 
-  it("should remove movie from starred", () => {
+  it("should remove movie from favorite", () => {
     const initialState = { ...state, starredMovies: moviesMock };
     const action = starredSlice.actions.unstarMovie(moviesMock[0]);
     const result = starredSlice.reducer(initialState, action);

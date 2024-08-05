@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { renderWithProviders } from "../shared/utils/renderWithProviders";
 import App from "../App";
 
-it("movies starred and saved to watch later", async () => {
+it("movies favorite and saved to watch later", async () => {
   renderWithProviders(<App />);
 
   await userEvent.type(screen.getByTestId("search-movies"), "forrest gump");
@@ -12,7 +12,7 @@ it("movies starred and saved to watch later", async () => {
       screen.getAllByText("Through the Eyes of Forrest Gump")[0],
     ).toBeInTheDocument();
   });
-  const starMovieLink = screen.getAllByTestId("starred-link")[0];
+  const starMovieLink = screen.getAllByTestId("favorite-link")[0];
   await waitFor(() => {
     expect(starMovieLink).toBeInTheDocument();
   });

@@ -4,9 +4,10 @@ import { EmptyState } from "../emptyState/EmptyState";
 
 const MovieGrid = ({ movies, title, emptyStateMessage }) => {
   const noMovies = movies.length === 0;
+  const isHomePage = window.location.pathname === "/";
 
   if (noMovies) {
-    return <EmptyState message={emptyStateMessage} />;
+    return <EmptyState message={emptyStateMessage} goToHome={!isHomePage} />;
   }
 
   return (

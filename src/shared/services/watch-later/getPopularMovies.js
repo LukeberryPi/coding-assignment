@@ -1,6 +1,6 @@
 const getPopularMovies = async (pageParam = 1) => {
   const response = await fetch(
-    `${process.env.REACT_APP_API_URL}/discover/movie?include_adult=false&page=${pageParam}&sort_by=popularity.desc`,
+    `${API_URL}/discover/movie?include_adult=false&page=${pageParam}&sort_by=popularity.desc`,
     {
       headers: {
         accept: "application/json",

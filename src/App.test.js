@@ -33,12 +33,12 @@ it("renders watch later component", async () => {
   ).toBeInTheDocument();
 });
 
-it("renders starred component", async () => {
+it("renders favorite component", async () => {
   renderWithProviders(<App />);
   const user = userEvent.setup();
-  await user.click(screen.getByTestId("nav-starred"));
-  expect(screen.getByText(/There are no starred movies/i)).toBeInTheDocument();
+  await user.click(screen.getByTestId("nav-favorite"));
+  expect(screen.getByText(/There are no favorite movies/i)).toBeInTheDocument();
   await waitFor(() => {
-    expect(screen.getByTestId("starred")).toBeInTheDocument();
+    expect(screen.getByTestId("favorite")).toBeInTheDocument();
   });
 });

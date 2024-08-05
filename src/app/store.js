@@ -1,14 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import moviesSlice from "../data/moviesSlice";
-import starredSlice from "../modules/starred-movies/starredSlice";
-import watchLaterSlice from "../modules/watch-later/watchLaterSlice";
+import { thunk } from "redux-thunk";
+import popularMoviesReducer from "../data/moviesSlice";
 
 const store = configureStore({
   reducer: {
-    movies: moviesSlice.reducer,
-    starred: starredSlice.reducer,
-    watchLater: watchLaterSlice.reducer,
+    popularMovies: popularMoviesReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
 });
 
 export default store;

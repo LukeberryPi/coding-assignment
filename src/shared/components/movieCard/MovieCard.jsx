@@ -17,8 +17,11 @@ const MovieCard = ({ movie }) => {
     <div
       style={{
         backgroundColor: "white",
-        width: "fit-content",
+        width: "180px",
         padding: "10px",
+        textOverflow: "ellipsis",
+        overflow: "hidden",
+        textAlign: "center",
       }}
     >
       <img
@@ -26,8 +29,17 @@ const MovieCard = ({ movie }) => {
         src={getImageURL(poster_path)}
         alt="movie poster"
       />
-      <p>{title}</p>
-      <div style={{ display: "flex", gap: "10px", flexDirection: "column" }}>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexGrow: 1 }}>
+        <p style={{ color: "black" }}>{title}</p>
+      </div>
+      <div
+        style={{
+          marginTop: "auto",
+          display: "flex",
+          gap: "10px",
+          flexDirection: "column",
+        }}
+      >
         <button onClick={addToFavorites}>add to favorites</button>
         <button onClick={addToWatchLater}>add to watch later</button>
       </div>
