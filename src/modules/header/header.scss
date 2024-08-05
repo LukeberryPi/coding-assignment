@@ -7,6 +7,10 @@ header {
     display: flex;
     justify-content: space-between;
 
+    .logo-text {
+      font-size: 2rem;
+    }
+
     .nav-link-container {
       display: flex;
       align-items: center;
@@ -27,9 +31,8 @@ header {
     border-radius: 1rem;
     outline: none;
 
-
     &:focus {
-      outline: 2px solid #ccc;
+      outline: 2px solid white;
     }
   }
 }

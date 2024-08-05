@@ -7,8 +7,10 @@ const Header = ({ searchMovies }) => {
     <header>
       <nav>
         <Link to="/" data-testid="logo-button" className="nav-link">
-          <i className="bi bi-film" />
-          Movieland
+          <div>
+            <i className="bi bi-film h2" />
+          </div>
+          <span className="logo-text">Movieland</span>
         </Link>
 
         <input
