@@ -1,28 +1,21 @@
+// TrailerModal.js
+
+import React from "react";
+
+import "./TrailerModal.scss";
+import { X } from "lucide-react";
+
 const TrailerModal = ({ movieTitle, youtubeVideoId, isOpen, onClose }) => {
   const getEmbedUrl = (videoId) => {
     return `https://www.youtube.com/embed/${videoId}`;
   };
 
   return (
-    <dialog
-      style={{
-        padding: "1rem",
-        position: "absolute",
-        display: "flex",
-        flexDirection: "column",
-        gap: "1rem",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-      }}
-    >
-      <div style={{ display: "flex", justifyContent: "end" }}>
+    <dialog className="trailer-dialog">
+      <div className="trailer-dialog__header">
         <span>{movieTitle}</span>
-        <button
-          onClick={onClose}
-          style={{ backgroundColor: "transparent", border: "none" }}
-        >
-          <i className="bi bi-x h3" />
+        <button onClick={onClose} className="trailer-dialog__close-button">
+          <X />
         </button>
       </div>
       <iframe
@@ -30,10 +23,9 @@ const TrailerModal = ({ movieTitle, youtubeVideoId, isOpen, onClose }) => {
         height="315"
         src={getEmbedUrl(youtubeVideoId)}
         title="YouTube video player"
-        frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
       ></iframe>
     </dialog>
   );

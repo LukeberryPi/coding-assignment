@@ -1,3 +1,4 @@
+import { Clock, Film, Search, Star } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 
 import "./Header.scss";
@@ -8,14 +9,14 @@ const Header = ({ searchMovies }) => {
       <nav>
         <Link to="/" className="nav-link">
           <div>
-            <i className="bi bi-film h3" />
+            <Film />
           </div>
           <span className="logo-text">Movieland</span>
         </Link>
 
         <div className="search-container">
           <label htmlFor="search-movies">
-            <i className="bi bi-search" />
+            <Search />
           </label>
           <input
             type="search"
@@ -30,13 +31,13 @@ const Header = ({ searchMovies }) => {
         <div className="nav-link-container">
           <NavLink className="nav-link" to="/favorite">
             <div>
-              <i className="bi h4 bi-star" />
+              <Star />
             </div>
             Favorites
           </NavLink>
           <NavLink className="nav-link" to="/watch-later">
             <div>
-              <i className="bi h4 bi-clock" />
+              <Clock />
             </div>
             Watch Later
           </NavLink>

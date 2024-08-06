@@ -5,12 +5,21 @@ import { EmptyState } from "../../../shared/components/emptyState/EmptyState.jsx
 import MovieCard from "../movieCard/MovieCard.jsx";
 import "./MovieGrid.scss";
 
-const MovieGrid = ({ movies, title, emptyStateMessage, resetStateButton = null }) => {
+const MovieGrid = ({
+  movies,
+  title,
+  emptyStateMessage,
+  resetStateButton = null,
+}) => {
   const noMovies = movies.length === 0;
   const isHomePage = window.location.pathname === "/";
 
   if (noMovies) {
-    return <EmptyState message={emptyStateMessage} goToHome={!isHomePage} />;
+    return (
+      <>
+        <EmptyState message={emptyStateMessage} goToHome={!isHomePage} />
+      </>
+    );
   }
 
   return (

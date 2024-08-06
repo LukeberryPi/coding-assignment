@@ -10,7 +10,10 @@ import {
 } from "react-router-dom";
 
 import { getPopularMovies } from "./data/popularMoviesSlice.js";
-import { resetFavoriteMovies } from "./modules/favoriteMovies/favoriteMoviesSlice.js";
+import {
+  getFavoriteMovies,
+  resetFavoriteMovies,
+} from "./modules/favoriteMovies/favoriteMoviesSlice.js";
 import Header from "./modules/header/Header.jsx";
 import { resetWatchLaterMovies } from "./modules/watchLaterMovies/watchLaterMoviesSlice.js";
 import MovieGrid from "./shared/components/movieGrid/MovieGrid.jsx";
@@ -42,6 +45,10 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getPopularMovies());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getFavoriteMovies());
   }, [dispatch]);
 
   useEffect(() => {
@@ -99,9 +106,10 @@ const App = () => {
                 emptyStateMessage="You have no Favorite Movies. You can add some on the home page."
                 movies={favoriteMovies}
                 resetStateButton={
-                  <button onClick={() => dispatch(resetFavoriteMovies())}>
-                    Reset your Favorite Movies
-                  </button>
+                  <ResetStateButton
+                    message="Reset your Favorite Movies"
+                    callback={resetFavoriteMovies}
+                  />
                 }
               />
             }
@@ -116,7 +124,7 @@ const App = () => {
                 resetStateButton={
                   <ResetStateButton
                     message="Reset your Watch Later Movies"
-                    callback={resetWatchLaterMovies()}
+                    callback={resetWatchLaterMovies}
                   />
                 }
               />

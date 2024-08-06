@@ -1,4 +1,6 @@
 import { useDispatch } from "react-redux";
+
+import { resetFavoriteMovies } from "../../../modules/favoriteMovies/favoriteMoviesSlice";
 import "./ResetStateButton.scss";
 
 const ResetStateButton = ({ message, callback }) => {
@@ -11,7 +13,7 @@ const ResetStateButton = ({ message, callback }) => {
     if (!sure) {
       return;
     }
-    dispatch(callback);
+    dispatch(callback());
   };
 
   return (

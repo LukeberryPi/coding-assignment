@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 
+import { Clock, Star } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 
-import "./MovieCard.scss";
 import { addFavoriteMovie } from "../../../modules/favoriteMovies/favoriteMoviesSlice.js";
 import TrailerModal from "../trailerModal/TrailerModal.jsx";
+import "./MovieCard.scss";
 
 const MovieCard = ({ movie }) => {
   const dispatch = useDispatch();
@@ -18,10 +19,10 @@ const MovieCard = ({ movie }) => {
   // // } = useSelector((state) => state.watchLaterMovies);
 
   // @Todo: find interface and fix
-  const isFavoriteMovie = favoriteMovies.some(
-    (favorite) => favorite.id === 888,
-  );
-  console.log(isFavoriteMovie)
+  // const isFavoriteMovie = favoriteMovies.some(
+  //   (favorite) => favorite.id === 888,
+  // );
+  // console.log(isFavoriteMovie);
   // const isWatchLaterMovie = watchLaterMovies.includes(movie.id);
 
   const dialogRef = useRef(null);
@@ -76,13 +77,10 @@ const MovieCard = ({ movie }) => {
         </div>
         <div className="movie-card__actions">
           <button onClick={handleStarClick}>
-            {/* <i data-is-favorite={isFavoriteMovie} className="h4 bi bi-star" /> */}
+            <Star />
           </button>
           <button onClick={handleClockClick}>
-            <i
-              // data-is-watch-later={isWatchLaterMovie}
-              className="h4 bi bi-clock"
-            />
+            <Clock />
           </button>
         </div>
       </div>
