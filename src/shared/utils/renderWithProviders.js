@@ -6,7 +6,7 @@ import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
-import moviesSlice from "../../data/moviesSlice";
+import moviesSlice from "../../data/popularMoviesSlice";
 import favoriteMoviesSlice from "../../modules/favoriteMovies/favoriteMoviesSlice";
 import watchLaterMoviesSlice from "../../modules/watchLaterMovies/watchLaterMoviesSlice";
 

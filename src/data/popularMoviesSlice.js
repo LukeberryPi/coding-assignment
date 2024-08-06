@@ -7,7 +7,7 @@ export const getPopularMovies = createAsyncThunk(
   async (pageParam = 1, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        `${API_URL}/discover/movie?include_adult=false&page=${pageParam}&sort_by=popularity.desc`,
+        `${API_URL}/discover/movie?page=${pageParam}&sort_by=popularity.desc`,
         {
           headers: {
             accept: "application/json",
@@ -24,7 +24,7 @@ export const getPopularMovies = createAsyncThunk(
 );
 
 const initialState = {
-  movies: [],
+  popularMovies: [],
   status: "idle",
   error: null,
 };
@@ -32,20 +32,14 @@ const initialState = {
 const popularMoviesSlice = createSlice({
   name: "popularMovies",
   initialState,
-  reducers: {
-    resetPopularMovies(state) {
-      state.movies = [];
-      state.status = "idle";
-      state.error = null;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getPopularMovies.pending, (state) => {
         state.status = "loading";
       })
       .addCase(getPopularMovies.fulfilled, (state, action) => {
-        state.movies = action.payload;
+        state.popularMovies = action.payload;
         state.status = "succeeded";
       })
       .addCase(getPopularMovies.rejected, (state, action) => {
@@ -55,5 +49,4 @@ const popularMoviesSlice = createSlice({
   },
 });
 
-export const { resetPopularMovies } = popularMoviesSlice.actions;
 export default popularMoviesSlice.reducer;

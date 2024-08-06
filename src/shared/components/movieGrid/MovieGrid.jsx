@@ -1,6 +1,6 @@
-import MovieCard from "../movieCard/MovieCard";
-import "./movie-grid.scss";
-import { EmptyState } from "../emptyState/EmptyState";
+import { EmptyState } from "../../../shared/components/emptyState/EmptyState.jsx";
+import MovieCard from "../movieCard/MovieCard.jsx";
+import "./MovieGrid.scss";
 
 const MovieGrid = ({ movies, title, emptyStateMessage }) => {
   const noMovies = movies.length === 0;

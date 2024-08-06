@@ -1,12 +1,11 @@
 .movie-grid {
   width: 100%;
-
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   line-clamp: 1;
+}
 
-  @media (max-width: 720px) {
-    padding-top: 70px;
-  }
+.movie-grid-title {
+  margin-bottom: 2rem;
 }

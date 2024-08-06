@@ -9,23 +9,22 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import { getPopularMovies } from "./data/moviesSlice";
+import { getPopularMovies } from "./data/popularMoviesSlice.js";
 import Header from "./modules/header/Header.jsx";
 import MovieGrid from "./shared/components/movieGrid/MovieGrid.jsx";
-import { moviesMock } from "./shared/movies.mocks.js";
-import "./app.scss";
+import "./App.scss";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { movies, status, error } = useSelector((state) => state.popularMovies);
+  const { popularMovies, status, error } = useSelector((state) => state.popularMovies);
 
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("q");
   const location = useLocation();
   const navigate = useNavigate();
 
-  const favoriteMovies = moviesMock;
-  const watchLaterMovies = moviesMock;
+  const favoriteMovies = popularMovies;
+  const watchLaterMovies = popularMovies;
 
   useEffect(() => {
     dispatch(getPopularMovies());
@@ -64,7 +63,7 @@ const App = () => {
               <MovieGrid
                 title="Popular Movies"
                 emptyStateMessage="There are no popular movies to show."
-                movies={movies}
+                movies={popularMovies}
               />
             }
           />
@@ -74,7 +73,7 @@ const App = () => {
               <MovieGrid
                 title={`Search: ${searchQuery}`}
                 emptyStateMessage="No movies matched your search. Try searching for something else."
-                movies={favoriteMovies}
+                movies={popularMovies}
               />
             }
           />
@@ -83,7 +82,7 @@ const App = () => {
             element={
               <MovieGrid
                 title="Favorite Movies"
-                emptyStateMessage="You have no Favorite Movies. You can star movies on the home page."
+                emptyStateMessage="You have no Favorite Movies. You can add some on the home page."
                 movies={favoriteMovies}
               />
             }

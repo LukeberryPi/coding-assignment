@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./empty-state.scss";
+import "./EmptyState.scss";
 
 export const EmptyState = ({ message, goToHome = true }) => {
   return (

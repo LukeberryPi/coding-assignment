@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 
-import "./header.scss";
+import "./Header.scss";
 
 const Header = ({ searchMovies }) => {
   return (

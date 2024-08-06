@@ -1,4 +1,4 @@
-const TrailerModal = ({ youtubeVideoId, isOpen, onClose }) => {
+const TrailerModal = ({ movieTitle, youtubeVideoId, isOpen, onClose }) => {
   const getEmbedUrl = (videoId) => {
     return `https://www.youtube.com/embed/${videoId}`;
   };
@@ -15,9 +15,9 @@ const TrailerModal = ({ youtubeVideoId, isOpen, onClose }) => {
         left: "50%",
         transform: "translate(-50%, -50%)",
       }}
-      open={isOpen}
     >
       <div style={{ display: "flex", justifyContent: "end" }}>
+        <span>{movieTitle}</span>
         <button
           onClick={onClose}
           style={{ backgroundColor: "transparent", border: "none" }}
