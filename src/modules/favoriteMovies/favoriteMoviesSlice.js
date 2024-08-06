@@ -64,9 +64,6 @@ export const getFavoriteMovies = createAsyncThunk(
           },
         },
       );
-      if (!response.ok) {
-        throw new Error("Failed to fetch Favorite movies");
-      }
       const data = await response.json();
       return data.results;
     } catch (error) {
@@ -87,13 +84,7 @@ const initialState = {
 const favoriteMoviesSlice = createSlice({
   name: "favoriteMovies",
   initialState,
-  reducers: {
-    resetFavoriteMovies(state) {
-      state.favoriteMovies = [];
-      state.status = "idle";
-      state.error = null;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getFavoriteMovies.pending, (state) => {
@@ -136,5 +127,4 @@ const favoriteMoviesSlice = createSlice({
   },
 });
 
-export const { resetFavoriteMovies } = favoriteMoviesSlice.actions;
 export default favoriteMoviesSlice.reducer;

@@ -29,7 +29,7 @@ body {
 button {
   border: none;
   transition: transform 0.2s ease-in-out;
-  background: initial;
+  background: inherit;
   &:active {
     transform: scale(0.95);
     transition: transform 0.2s ease-in-out;

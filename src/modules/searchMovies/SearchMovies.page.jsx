@@ -1,19 +1,18 @@
-import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
-import Header from "../../shared/components/header/Header.jsx";
 import MovieGrid from "../../shared/components/movieGrid/MovieGrid.jsx";
 
 const SearchMoviesPage = () => {
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("q");
+
   return (
     <>
-      <Header />
       <main className="main">
         <MovieGrid
-          title="Search Results"
-          // @Todo: make dynamic with search query
-          // title={`Search: ${searchQuery}`}
+          title={`Search: ${searchQuery}`}
           emptyStateMessage="No movies matched your search. Try searching for something else."
-          movies={[]}
+          movies={undefined}
         />
       </main>
     </>

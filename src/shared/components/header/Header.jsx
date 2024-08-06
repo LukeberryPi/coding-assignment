@@ -1,35 +1,11 @@
 import { useEffect } from "react";
 
 import { Clock, Film, Search, Star } from "lucide-react";
-import {
-  Link,
-  NavLink,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import "./Header.scss";
 
-const Header = () => {
-  const [searchParams] = useSearchParams();
-  const searchQuery = searchParams.get("q");
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (searchQuery && location.pathname !== "/search") {
-      navigate(`/search?q=${searchQuery}`);
-    }
-  }, [searchQuery, navigate, location.pathname]);
-
-  const searchMovies = (query) => {
-    if (query) {
-      navigate(`/search?q=${encodeURIComponent(query)}`);
-    } else {
-      navigate("/");
-    }
-  };
+const Header = ({ searchMovies }) => {
   return (
     <header>
       <nav>

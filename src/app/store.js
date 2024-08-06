@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { thunk } from "redux-thunk";
 
-import popularMoviesReducer from "../data/popularMoviesSlice";
 import favoriteMoviesReducer from "../modules/favoriteMovies/favoriteMoviesSlice";
+import popularMoviesReducer from "../modules/popularMovies/popularMoviesSlice";
 import watchLaterMoviesReducer from "../modules/watchLaterMovies/watchLaterMoviesSlice";
 
 const store = configureStore({

@@ -3,44 +3,51 @@ import { useRef, useState } from "react";
 import { Clock, Star } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addFavoriteMovie } from "../../../modules/favoriteMovies/favoriteMoviesSlice.js";
-import { addWatchLaterMovie } from "../../../modules/watchLaterMovies/watchLaterMoviesSlice.js";
+import {
+  addFavoriteMovie,
+  removeFavoriteMovie,
+} from "../../../modules/favoriteMovies/favoriteMoviesSlice.js";
+import {
+  addWatchLaterMovie,
+  removeWatchLaterMovie,
+} from "../../../modules/watchLaterMovies/watchLaterMoviesSlice.js";
 import TrailerModal from "../trailerModal/TrailerModal.jsx";
 import "./MovieCard.scss";
 
 const MovieCard = ({ movie }) => {
-  const dispatch = useDispatch();
-  const { favoriteMovies, status, error } = useSelector(
-    (state) => state.favoriteMovies,
-  );
-  // const {
-  //   watchLaterMovies,
-  //   // status: watchLaterStatus,
-  //   // error: watchLaterError,
-  // // } = useSelector((state) => state.watchLaterMovies);
+  const { id, poster_path, title } = movie;
 
-  // @Todo: find interface and fix
-  // const isFavoriteMovie = favoriteMovies.some(
-  //   (favorite) => favorite.id === 888,
-  // );
-  // console.log(isFavoriteMovie);
-  // const isWatchLaterMovie = watchLaterMovies.includes(movie.id);
+  const dispatch = useDispatch();
+  const { favoriteMovies } = useSelector((state) => state.favoriteMovies);
+  const isFavoriteMovie = favoriteMovies.some((favorite) => favorite.id === id);
+  const { watchLaterMovies } = useSelector((state) => state.watchLaterMovies);
+  const isWatchLaterMovie = watchLaterMovies.some(
+    (watchLater) => watchLater.id === id,
+  );
 
   const dialogRef = useRef(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [youtubeVideoId, setYoutubeVideoId] = useState("");
-
-  const { id, poster_path, title } = movie;
 
   const getImageURL = (poster_path) => {
     return `https://image.tmdb.org/t/p/w500/${poster_path}`;
   };
 
   const handleStarClick = () => {
+    if (isFavoriteMovie) {
+      dispatch(removeFavoriteMovie(id));
+      return;
+    }
+
     dispatch(addFavoriteMovie(id));
   };
 
   const handleClockClick = () => {
+    if (isWatchLaterMovie) {
+      dispatch(removeWatchLaterMovie(id));
+      return;
+    }
+
     dispatch(addWatchLaterMovie(id));
   };
 
@@ -79,11 +86,11 @@ const MovieCard = ({ movie }) => {
         <div className="movie-card__actions">
           <button onClick={handleStarClick}>
             <Star />
-            <span>Add</span>
+            <span>{isFavoriteMovie ? "Remove" : "Add"}</span>
           </button>
           <button onClick={handleClockClick}>
             <Clock />
-            <span>Add</span>
+            <span>{isWatchLaterMovie ? "Remove" : "Add"}</span>
           </button>
         </div>
       </div>

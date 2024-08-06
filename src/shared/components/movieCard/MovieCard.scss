@@ -29,6 +29,9 @@
       align-items: center;
       color: white;
       padding-block: 0.5rem;
+      &:hover {
+        opacity: 80%;
+      }
     }
   }
 }

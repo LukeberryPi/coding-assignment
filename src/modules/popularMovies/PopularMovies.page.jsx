@@ -2,11 +2,11 @@ import { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { getPopularMovies } from "../../data/popularMoviesSlice";
 import ErrorState from "../../shared/components/errorState/ErrorState.jsx";
-import Header from "../../shared/components/header/Header.jsx";
 import LoadingState from "../../shared/components/loadingState/LoadingState.jsx";
 import MovieGrid from "../../shared/components/movieGrid/MovieGrid.jsx";
+
+import { getPopularMovies } from "./popularMoviesSlice.js";
 
 const PopularMoviesPage = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,6 @@ const PopularMoviesPage = () => {
 
   return (
     <>
-      <Header />
       <main>
         <MovieGrid
           title="Popular Movies"

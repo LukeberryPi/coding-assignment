@@ -64,9 +64,6 @@ export const getWatchLaterMovies = createAsyncThunk(
           },
         },
       );
-      if (!response.ok) {
-        throw new Error("Failed to fetch Watch Later movies");
-      }
       const data = await response.json();
       return data.results;
     } catch (error) {
@@ -87,13 +84,7 @@ const initialState = {
 const watchLaterMoviesSlice = createSlice({
   name: "watchLaterMovies",
   initialState,
-  reducers: {
-    resetWatchLaterMovies(state) {
-      state.watchLaterMovies = [];
-      state.status = "idle";
-      state.error = null;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getWatchLaterMovies.pending, (state) => {
@@ -136,5 +127,4 @@ const watchLaterMoviesSlice = createSlice({
   },
 });
 
-export const { resetWatchLaterMovies } = watchLaterMoviesSlice.actions;
 export default watchLaterMoviesSlice.reducer;
