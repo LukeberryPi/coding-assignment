@@ -7,15 +7,19 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
-    "node-sass": "^8.0.0",
+    "lucide-react": "^0.424.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-player": "^2.11.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
-    "reactjs-popup": "^2.0.5",
+    "redux-thunk": "^3.1.0",
+    "sass": "^1.77.8",
     "web-vitals": "^2.1.4"
+  },
+  "resolutions": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -23,11 +27,52 @@
     "test": "react-scripts test --coverage",
     "eject": "react-scripts eject"
   },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": false,
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "arrowParens": "always"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "plugin:import/recommended",
+      "plugin:import/react"
+    ],
+    "plugins": [
+      "import"
+    ],
+    "rules": {
+      "import/order": [
+        "error",
+        {
+          "groups": [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index"
+          ],
+          "pathGroups": [
+            {
+              "pattern": "react",
+              "group": "external",
+              "position": "before"
+            }
+          ],
+          "pathGroupsExcludedImportTypes": [
+            "react"
+          ],
+          "newlines-between": "always"
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [
@@ -40,5 +85,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "3.3.3"
   }
 }
