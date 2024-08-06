@@ -9,11 +9,21 @@ import { getFavoriteMovies } from "./favoriteMoviesSlice.js";
 
 const FavoriteMoviesPage = () => {
   const dispatch = useDispatch();
-  const { favoriteMovies } = useSelector((state) => state.favoriteMovies);
+  const { favoriteMovies, status, error } = useSelector(
+    (state) => state.favoriteMovies,
+  );
 
   useEffect(() => {
     dispatch(getFavoriteMovies());
   }, [dispatch]);
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  if (status === "failed") {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <>

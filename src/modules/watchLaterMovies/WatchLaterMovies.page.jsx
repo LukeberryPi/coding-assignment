@@ -22,11 +22,11 @@ const WatchLaterPage = () => {
   }, [dispatch]);
 
   if (status === "loading") {
-    return <span>Loading...</span>;
+    return <div>Loading...</div>;
   }
 
   if (status === "failed") {
-    return <span>Error: {error}</span>;
+    return <div>Error: {error}</div>;
   }
 
   return (
