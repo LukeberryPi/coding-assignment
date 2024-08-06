@@ -1,17 +1,18 @@
-.empty-state-container {
+.empty-state {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 10rem;
+  height: 100%;
   justify-content: center;
   gap: 1rem;
-}
-
-.go-home-anchor {
-  padding: 0.5rem 1rem;
-  border-radius: 1rem;
-  background-color: white;
-  color: var(--secondary-color);
-  &:hover {
-    opacity: 80%;
+  &__anchor {
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    background-color: white;
+    color: var(--secondary-color);
+    &:hover {
+      opacity: 80%;
+    }
   }
 }

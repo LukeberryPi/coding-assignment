@@ -13,13 +13,19 @@ const Header = ({ searchMovies }) => {
           <span className="logo-text">Movieland</span>
         </Link>
 
-        <input
-          type="search"
-          onChange={(e) => searchMovies(e.target.value)}
-          placeholder="Search movies..."
-          aria-label="Search movies"
-          aria-labelledby="search-movies"
-        />
+        <div className="search-container">
+          <label htmlFor="search-movies">
+            <i className="bi bi-search" />
+          </label>
+          <input
+            type="search"
+            id="search-movies"
+            onChange={(e) => searchMovies(e.target.value)}
+            placeholder="Search movies..."
+            aria-label="Search movies"
+            aria-labelledby="search-movies"
+          />
+        </div>
 
         <div className="nav-link-container">
           <NavLink className="nav-link" to="/favorite">

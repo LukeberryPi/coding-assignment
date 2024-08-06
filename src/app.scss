@@ -1,11 +1,10 @@
 #root {
-  color: white;
   display: flex;
   flex-direction: column;
   background: linear-gradient(
       0deg,
-      var(--primary-color) 20%,
-      var(--secondary-color) 100%
+      var(--primary-color),
+      var(--secondary-color)
     )
     no-repeat;
 }
@@ -13,8 +12,4 @@
 .main {
   padding: var(--header-height);
   min-height: 100vh;
-}
-
-.empty-state {
-  text-align: center;
 }

@@ -10,16 +10,12 @@ import {
 } from "react-router-dom";
 
 import { getPopularMovies } from "./data/popularMoviesSlice.js";
-import {
-  getFavoriteMovies,
-  resetFavoriteMovies,
-} from "./modules/favoriteMovies/favoriteMoviesSlice.js";
+import { resetFavoriteMovies } from "./modules/favoriteMovies/favoriteMoviesSlice.js";
 import Header from "./modules/header/Header.jsx";
-import MovieGrid from "./shared/components/movieGrid/MovieGrid.jsx";
-
-import "./App.scss";
-import ResetStateButton from "./shared/components/resetStateButton/ResetStateButton.jsx";
 import { resetWatchLaterMovies } from "./modules/watchLaterMovies/watchLaterMoviesSlice.js";
+import MovieGrid from "./shared/components/movieGrid/MovieGrid.jsx";
+import ResetStateButton from "./shared/components/resetStateButton/ResetStateButton.jsx";
+import "./App.scss";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -33,13 +29,16 @@ const App = () => {
     status: favoriteStatus,
     error: favoriteError,
   } = useSelector((state) => state.favoriteMovies);
+  const {
+    watchLaterMovies,
+    status: watchLaterStatus,
+    error: watchLaterError,
+  } = useSelector((state) => state.watchLaterMovies);
 
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("q");
   const location = useLocation();
   const navigate = useNavigate();
-
-  const watchLaterMovies = popularMovies;
 
   useEffect(() => {
     dispatch(getPopularMovies());
@@ -117,7 +116,7 @@ const App = () => {
                 resetStateButton={
                   <ResetStateButton
                     message="Reset your Watch Later Movies"
-                    callback={resetWatchLaterMovies()} 
+                    callback={resetWatchLaterMovies()}
                   />
                 }
               />

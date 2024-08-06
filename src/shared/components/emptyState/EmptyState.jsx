@@ -3,10 +3,10 @@ import "./EmptyState.scss";
 
 export const EmptyState = ({ message, goToHome = true }) => {
   return (
-    <div className="empty-state-container">
+    <div className="empty-state">
       <p>{message}</p>
       {!!goToHome && (
-        <Link className="go-home-anchor" to="/">
+        <Link className="empty-state__anchor" to="/">
           Go to home page
         </Link>
       )}
