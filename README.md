@@ -4,10 +4,6 @@ React + Redux + RTK + Bootstrap application that fetches movies from [https://ww
 
 Created with [Create React App](https://github.com/facebook/create-react-app).
 
-## Production access
-
-This project is available in production: [https://luke-berry-movieland.vercel.app](https://luke-berry-movieland.vercel.app).
-
 ## How to run locally
 
 1. Fork this repository
