@@ -1,8 +1,12 @@
 .movie-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-}
-
-.movie-grid-title {
-  margin-block: 2rem;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__title {
+    margin-block: 2rem;
+  }
 }

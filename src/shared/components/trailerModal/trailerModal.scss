@@ -1,3 +1,5 @@
+// @Todo: fix forwardRef for this to be an actual dialog with a backdrop
+// and activated with .showModal() and closed with .close()
 dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.5);
 }

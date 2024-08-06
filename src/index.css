@@ -29,9 +29,13 @@ button {
   transition: transform 0.2s ease-in-out;
   background: initial;
   &:active {
-    transform: scale(0.9);
+    transform: scale(0.95);
     transition: transform 0.2s ease-in-out;
   }
+}
+
+a {
+  text-decoration: none;
 }
 
 code {
