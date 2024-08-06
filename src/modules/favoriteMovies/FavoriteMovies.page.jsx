@@ -2,10 +2,16 @@ import { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
+import ErrorState from "../../shared/components/errorState/ErrorState.jsx";
 import Header from "../../shared/components/header/Header.jsx";
+import LoadingState from "../../shared/components/loadingState/LoadingState.jsx";
 import MovieGrid from "../../shared/components/movieGrid/MovieGrid.jsx";
+import ResetStateButton from "../../shared/components/resetStateButton/ResetStateButton.jsx";
 
-import { getFavoriteMovies } from "./favoriteMoviesSlice.js";
+import {
+  getFavoriteMovies,
+  resetFavoriteMovies,
+} from "./favoriteMoviesSlice.js";
 
 const FavoriteMoviesPage = () => {
   const dispatch = useDispatch();
@@ -18,11 +24,11 @@ const FavoriteMoviesPage = () => {
   }, [dispatch]);
 
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return <LoadingState />;
   }
 
   if (status === "failed") {
-    return <div>Error: {error}</div>;
+    return <ErrorState error={error} />;
   }
 
   return (
@@ -31,7 +37,13 @@ const FavoriteMoviesPage = () => {
       <main>
         <MovieGrid
           title="Favorite Movies"
-          emptyStateMessage="You have no movies saved to Favorite. You can add some on the home page."
+          emptyStateMessage="You have no Favorite Movies. You can add some on the home page."
+          resetStateButton={
+            <ResetStateButton
+              message="Reset your Watch Later Movies"
+              callback={resetFavoriteMovies}
+            />
+          }
           movies={favoriteMovies}
         />
       </main>

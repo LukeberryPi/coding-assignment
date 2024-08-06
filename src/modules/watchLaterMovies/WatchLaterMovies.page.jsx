@@ -2,7 +2,9 @@ import { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
+import ErrorState from "../../shared/components/errorState/ErrorState.jsx";
 import Header from "../../shared/components/header/Header.jsx";
+import LoadingState from "../../shared/components/loadingState/LoadingState.jsx";
 import MovieGrid from "../../shared/components/movieGrid/MovieGrid.jsx";
 import ResetStateButton from "../../shared/components/resetStateButton/ResetStateButton.jsx";
 
@@ -22,11 +24,11 @@ const WatchLaterPage = () => {
   }, [dispatch]);
 
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return <LoadingState />;
   }
 
   if (status === "failed") {
-    return <div>Error: {error}</div>;
+    return <ErrorState error={error} />;
   }
 
   return (
@@ -36,7 +38,7 @@ const WatchLaterPage = () => {
         <MovieGrid
           title="Watch Later Movies"
           movies={watchLaterMovies}
-          emptyStateMessage="You have no movies saved to Watch Later. You can add some on the home page."
+          emptyStateMessage="You have no Watch Later movies. You can add some on the home page."
           resetStateButton={
             <ResetStateButton
               message="Reset your Watch Later Movies"
