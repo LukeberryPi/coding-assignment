@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import "./TrailerModal.scss";
+import "./trailerModal.scss";
 import { X } from "lucide-react";
 
 const TrailerModal = ({ movieTitle, youtubeVideoId, isOpen, onClose }) => {

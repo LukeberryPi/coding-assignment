@@ -11,7 +11,7 @@ import {
   addWatchLaterMovie,
   removeWatchLaterMovie,
 } from "../../../modules/watchLaterMovies/watchLaterMoviesSlice.js";
-import TrailerModal from "../trailerModal/TrailerModal.jsx";
+import TrailerModal from "../trailerModal/trailerModal.jsx";
 import "./MovieCard.scss";
 
 const MovieCard = ({ movie }) => {
