@@ -15,7 +15,7 @@ import {
   resetFavoriteMovies,
 } from "./modules/favoriteMovies/favoriteMoviesSlice.js";
 import Header from "./modules/header/Header.jsx";
-import { resetWatchLaterMovies } from "./modules/watchLaterMovies/watchLaterMoviesSlice.js";
+import { getWatchLaterMovies, resetWatchLaterMovies } from "./modules/watchLaterMovies/watchLaterMoviesSlice.js";
 import MovieGrid from "./shared/components/movieGrid/MovieGrid.jsx";
 import ResetStateButton from "./shared/components/resetStateButton/ResetStateButton.jsx";
 import "./App.scss";
@@ -50,6 +50,10 @@ const App = () => {
   useEffect(() => {
     dispatch(getFavoriteMovies());
   }, [dispatch]);
+
+   useEffect(() => {
+     dispatch(getWatchLaterMovies());
+   }, [dispatch]);
 
   useEffect(() => {
     if (searchQuery && location.pathname !== "/search") {

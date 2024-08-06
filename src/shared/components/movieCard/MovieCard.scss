@@ -21,15 +21,14 @@
     display: flex;
     margin-top: auto;
     bottom: 0;
-    color: white;
 
     button {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: white;
       padding-block: 0.5rem;
-      border-top: solid 1px white;
-      &:first-of-type {
-        border-right: solid 1px white;
-      }
     }
   }
 }

@@ -20,7 +20,7 @@ const options = {
  * Adds or removes a movie from the Watch Later Movies list
  * @param {string} type - "add" | "remove"
  */
-const createFavoriteThunk = (type) => {
+const createWatchLaterThunk = (type) => {
   const boolMap = {
     add: true,
     remove: false,
@@ -75,8 +75,8 @@ export const getWatchLaterMovies = createAsyncThunk(
   },
 );
 
-export const addWatchLaterMovie = createFavoriteThunk("add");
-export const removeWatchLaterMovie = createFavoriteThunk("remove");
+export const addWatchLaterMovie = createWatchLaterThunk("add");
+export const removeWatchLaterMovie = createWatchLaterThunk("remove");
 
 const initialState = {
   watchLaterMovies: [],

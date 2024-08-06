@@ -4,6 +4,7 @@ import { Clock, Star } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { addFavoriteMovie } from "../../../modules/favoriteMovies/favoriteMoviesSlice.js";
+import { addWatchLaterMovie } from "../../../modules/watchLaterMovies/watchLaterMoviesSlice.js";
 import TrailerModal from "../trailerModal/TrailerModal.jsx";
 import "./MovieCard.scss";
 
@@ -40,7 +41,7 @@ const MovieCard = ({ movie }) => {
   };
 
   const handleClockClick = () => {
-    console.log("add to watch later");
+    dispatch(addWatchLaterMovie(id));
   };
 
   // @Todo: open modal with trailer dialog
@@ -78,9 +79,11 @@ const MovieCard = ({ movie }) => {
         <div className="movie-card__actions">
           <button onClick={handleStarClick}>
             <Star />
+            <span>Add</span>
           </button>
           <button onClick={handleClockClick}>
             <Clock />
+            <span>Remove</span>
           </button>
         </div>
       </div>

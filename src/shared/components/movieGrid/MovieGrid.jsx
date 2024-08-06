@@ -1,6 +1,3 @@
-import { useDispatch } from "react-redux";
-
-import { resetFavoriteMovies } from "../../../modules/favoriteMovies/favoriteMoviesSlice.js";
 import { EmptyState } from "../../../shared/components/emptyState/EmptyState.jsx";
 import MovieCard from "../movieCard/MovieCard.jsx";
 import "./MovieGrid.scss";
@@ -22,6 +19,8 @@ const MovieGrid = ({
     );
   }
 
+  console.log(movies);
+
   return (
     <div className="movie-grid__container">
       <div className="movie-grid__header">
@@ -29,7 +28,7 @@ const MovieGrid = ({
         {resetStateButton}
       </div>
       <div className="movie-grid">
-        {movies.map((movie) => (
+        {movies.length > 0 && movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
