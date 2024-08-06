@@ -10,24 +10,39 @@ import {
 } from "react-router-dom";
 
 import { getPopularMovies } from "./data/popularMoviesSlice.js";
+import { getFavoriteMovies } from "./modules/favoriteMovies/favoriteMoviesSlice.js";
 import Header from "./modules/header/Header.jsx";
 import MovieGrid from "./shared/components/movieGrid/MovieGrid.jsx";
+
 import "./App.scss";
+
 
 const App = () => {
   const dispatch = useDispatch();
-  const { popularMovies, status, error } = useSelector((state) => state.popularMovies);
+  const {
+    popularMovies,
+    status: popularStatus,
+    error: popularError,
+  } = useSelector((state) => state.popularMovies);
+  const {
+    favoriteMovies,
+    status: favoriteStatus,
+    error: favoriteError,
+  } = useSelector((state) => state.favoriteMovies);
 
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("q");
   const location = useLocation();
   const navigate = useNavigate();
 
-  const favoriteMovies = popularMovies;
   const watchLaterMovies = popularMovies;
 
   useEffect(() => {
     dispatch(getPopularMovies());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getFavoriteMovies());
   }, [dispatch]);
 
   useEffect(() => {
@@ -44,12 +59,12 @@ const App = () => {
     }
   };
 
-  if (status === "loading") {
+  if (popularStatus === "loading") {
     return <div>Loading...</div>;
   }
 
-  if (status === "failed") {
-    return <div>Error: {error}</div>;
+  if (popularStatus === "failed") {
+    return <div>Error: {popularError}</div>;
   }
 
   return (

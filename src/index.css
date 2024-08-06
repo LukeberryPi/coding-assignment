@@ -24,6 +24,16 @@ body {
   background-color: var(--secondary-color);
 }
 
+button {
+  border: none;
+  transition: transform 0.2s ease-in-out;
+  background: initial;
+  &:active {
+    transform: scale(0.9);
+    transition: transform 0.2s ease-in-out;
+  }
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

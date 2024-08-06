@@ -1,31 +1,47 @@
 .movie-card {
   background-color: white;
-  width: 180px;
-  padding: 10px;
-  text-overflow: ellipsis;
+  width: min-content;
+  border: none;
+  height: 100%;
+  border-radius: 0.5rem;
   overflow: hidden;
-  text-align: center;
 }
 
 .movie-card__image {
-  width: 160px;
-  height: 240px;
+  width: 240px;
 }
 
 .movie-card__title-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
 }
 
 .movie-card__title {
   color: black;
+  font-weight: bold;
+  margin-block: 1rem;
 }
 
 .movie-card__actions {
-  margin-top: auto;
   display: flex;
-  gap: 10px;
-  flex-direction: column;
+  margin-top: auto;
+  bottom: 0;
+
+  button {
+    flex: 1;
+    padding-block: 0.5rem;
+    border-top: solid 1px;
+    &:first-of-type {
+      border-right: solid 1px;
+    }
+  }
+
+  i[data-is-favorite="true"] {
+    // background-color: orange;
+  }
+
+  i[data-is-watch-later="true"] {
+    // background-color: blue;
+  }
 }

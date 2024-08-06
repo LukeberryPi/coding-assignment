@@ -8,7 +8,18 @@ import TrailerModal from "../trailerModal/TrailerModal.jsx";
 
 const MovieCard = ({ movie }) => {
   const dispatch = useDispatch();
-  const { status, error } = useSelector((state) => state.favoriteMovies);
+  const { favoriteMovies, status, error } = useSelector(
+    (state) => state.favoriteMovies,
+  );
+  // const {
+  //   watchLaterMovies,
+  //   // status: watchLaterStatus,
+  //   // error: watchLaterError,
+  // // } = useSelector((state) => state.watchLaterMovies);
+
+  // @Todo: find interface and fix
+  const isFavoriteMovie = favoriteMovies.some(movie => movie === movie.id);
+  // const isWatchLaterMovie = watchLaterMovies.includes(movie.id);
 
   const dialogRef = useRef(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -20,11 +31,11 @@ const MovieCard = ({ movie }) => {
     return `https://image.tmdb.org/t/p/w500/${poster_path}`;
   };
 
-  const addToFavorites = () => {
+  const handleStarClick = () => {
     dispatch(addFavoriteMovie(id));
   };
 
-  const addToWatchLater = () => {
+  const handleClockClick = () => {
     console.log("add to watch later");
   };
 
@@ -39,7 +50,7 @@ const MovieCard = ({ movie }) => {
   };
 
   return (
-    <div className="movie-card">
+    <>
       {isDialogOpen && (
         <TrailerModal
           movieTitle={title}
@@ -49,21 +60,30 @@ const MovieCard = ({ movie }) => {
           onClose={closeDialog}
         />
       )}
-      <button onClick={handlePosterClick}>
-        <img
-          className="movie-card__image"
-          src={getImageURL(poster_path)}
-          alt={`${title} poster`}
-        />
-      </button>
-      <div className="movie-card__title-container">
-        <p className="movie-card__title">{title}</p>
+      <div className="movie-card">
+        <button onClick={handlePosterClick}>
+          <img
+            className="movie-card__image"
+            src={getImageURL(poster_path)}
+            alt={`${title} poster`}
+          />
+        </button>
+        <div className="movie-card__title-container">
+          <p className="movie-card__title">{title}</p>
+        </div>
+        <div className="movie-card__actions">
+          <button onClick={handleStarClick}>
+            <i data-is-favorite={true} className="h4 bi bi-star" />
+          </button>
+          <button onClick={handleClockClick}>
+            <i
+              // data-is-watch-later={isWatchLaterMovie}
+              className="h4 bi bi-clock"
+            />
+          </button>
+        </div>
       </div>
-      <div className="movie-card__actions">
-        <button onClick={addToFavorites}>Add to Favorites</button>
-        <button onClick={addToWatchLater}>Add to Watch Later</button>
-      </div>
-    </div>
+    </>
   );
 };
 

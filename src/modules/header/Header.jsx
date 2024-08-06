@@ -8,7 +8,7 @@ const Header = ({ searchMovies }) => {
       <nav>
         <Link to="/" className="nav-link">
           <div>
-            <i className="bi bi-film h2" />
+            <i className="bi bi-film h3" />
           </div>
           <span className="logo-text">Movieland</span>
         </Link>
@@ -23,11 +23,15 @@ const Header = ({ searchMovies }) => {
 
         <div className="nav-link-container">
           <NavLink className="nav-link" to="/favorite">
-            <i className="bi bi-star" />
+            <div>
+              <i className="bi h4 bi-star" />
+            </div>
             Favorites
           </NavLink>
           <NavLink className="nav-link" to="/watch-later">
-            <i className="bi bi-clock" />
+            <div>
+              <i className="bi h4 bi-clock" />
+            </div>
             Watch Later
           </NavLink>
         </div>
