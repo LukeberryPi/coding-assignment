@@ -13,7 +13,7 @@ import PopularMoviesPage from "./modules/popularMovies/PopularMovies.page.jsx";
 import SearchMoviesPage from "./modules/searchMovies/SearchMovies.page.jsx";
 import WatchLaterPage from "./modules/watchLaterMovies/WatchLaterMovies.page.jsx";
 import Header from "./shared/components/header/Header.jsx";
-import "./app.scss";
+import "./App.scss";
 import useDebounce from "./shared/hooks/useDebounce.js";
 
 const App = () => {
