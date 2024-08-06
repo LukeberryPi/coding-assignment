@@ -83,7 +83,7 @@ const MovieCard = ({ movie }) => {
           </button>
           <button onClick={handleClockClick}>
             <Clock />
-            <span>Remove</span>
+            <span>Add</span>
           </button>
         </div>
       </div>
