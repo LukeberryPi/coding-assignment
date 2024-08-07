@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Clock, Film, Search, Star } from "lucide-react";
-import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
+import { Link, NavLink, useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import useDebounce from "../../hooks/useDebounce";
 import "./Header.scss";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const debouncedSearchQuery = useDebounce(searchQuery, 600);
+  const debouncedSearchQuery = useDebounce((searchQuery || ""), 600);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -23,6 +23,7 @@ const Header = () => {
   };
 
   const handleNavigation = (path) => {
+    setSearchQuery("")
     navigate(path);
   };
 
