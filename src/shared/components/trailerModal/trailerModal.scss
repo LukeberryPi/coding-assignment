@@ -1,24 +1,32 @@
-// @Todo: fix forwardRef for this to be an actual dialog with a backdrop
-// and activated with .showModal() and closed with .close()
-dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
+::backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .trailer-dialog {
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   position: absolute;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  border-radius: 1rem;
+  color: white;
+  background-color: var(--secondary-color);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   &__header {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    p {
+      margin: 0;
+    }
   }
   &__close-button {
     background-color: transparent;
+    color: white;
     border: none;
   }
 }

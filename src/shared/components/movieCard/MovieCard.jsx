@@ -1,4 +1,4 @@
-import { useState, forwardRef } from "react";
+import { useState, useRef } from "react";
 
 import { Clock, Star } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,10 +11,9 @@ import {
   addWatchLaterMovie,
   removeWatchLaterMovie,
 } from "../../../modules/watchLaterMovies/watchLaterMoviesSlice.js";
-import TrailerModal from "../trailerModal/trailerModal.jsx";
 import "./MovieCard.scss";
 
-const MovieCard = forwardRef(({ movie }, ref) => {
+const MovieCard = ({ movie, onPosterClick }) => {
   const { id, poster_path, title } = movie;
 
   const dispatch = useDispatch();
@@ -24,9 +23,6 @@ const MovieCard = forwardRef(({ movie }, ref) => {
   const isWatchLaterMovie = watchLaterMovies.some(
     (watchLater) => watchLater.id === id,
   );
-
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [youtubeVideoId, setYoutubeVideoId] = useState("");
 
   const getImageURL = (poster_path) => {
     return `https://image.tmdb.org/t/p/w500/${poster_path}`;
@@ -50,52 +46,30 @@ const MovieCard = forwardRef(({ movie }, ref) => {
     dispatch(addWatchLaterMovie(id));
   };
 
-  const handlePosterClick = () => {
-    if (ref.current) {
-      ref.current.showModal();
-      setIsDialogOpen(true);
-    }
-  };
-
-  const closeDialog = () => {
-    setIsDialogOpen(false);
-  };
-
   return (
-    <>
-      {isDialogOpen && (
-        <TrailerModal
-          movieTitle={title}
-          youtubeVideoId={youtubeVideoId}
-          closeModal={setIsDialogOpen}
-          ref={ref}
-          onClose={closeDialog}
+    <div className="movie-card">
+      <button onClick={() => onPosterClick(movie)}>
+        <img
+          className="movie-card__image"
+          src={getImageURL(poster_path)}
+          alt={`${title} poster`}
         />
-      )}
-      <div className="movie-card">
-        <button onClick={handlePosterClick}>
-          <img
-            className="movie-card__image"
-            src={getImageURL(poster_path)}
-            alt={`${title} poster`}
-          />
-        </button>
-        <div className="movie-card__title-container">
-          <p className="movie-card__title">{title}</p>
-        </div>
-        <div className="movie-card__actions">
-          <button onClick={handleStarClick}>
-            <Star />
-            <span>{isFavoriteMovie ? "Remove" : "Add"}</span>
-          </button>
-          <button onClick={handleClockClick}>
-            <Clock />
-            <span>{isWatchLaterMovie ? "Remove" : "Add"}</span>
-          </button>
-        </div>
+      </button>
+      <div className="movie-card__title-container">
+        <p className="movie-card__title">{title}</p>
       </div>
-    </>
+      <div className="movie-card__actions">
+        <button onClick={handleStarClick}>
+          <Star />
+          <span>{isFavoriteMovie ? "Remove" : "Add"}</span>
+        </button>
+        <button onClick={handleClockClick}>
+          <Clock />
+          <span>{isWatchLaterMovie ? "Remove" : "Add"}</span>
+        </button>
+      </div>
+    </div>
   );
-});
+};
 
 export default MovieCard;
