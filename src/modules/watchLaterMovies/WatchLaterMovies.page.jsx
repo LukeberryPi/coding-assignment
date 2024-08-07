@@ -1,18 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import ErrorState from "../../shared/components/errorState/ErrorState.jsx";
 import LoadingState from "../../shared/components/loadingState/LoadingState.jsx";
 import MovieGrid from "../../shared/components/movieGrid/MovieGrid.jsx";
-import { getWatchLaterMovies } from "./watchLaterMoviesSlice.js";
-import { useEffect } from "react";
 
 const WatchLaterPage = () => {
-  const dispatch = useDispatch();
   const { watchLaterMovies, status, error } = useSelector(
     (state) => state.watchLaterMovies,
   );
-
-  console.log(watchLaterMovies);
 
   if (status === "loading") {
     return <LoadingState />;
@@ -25,7 +20,7 @@ const WatchLaterPage = () => {
   return (
     <main>
       <MovieGrid
-        title="Watch Later Movies"
+        title="Watch Later"
         movies={watchLaterMovies}
         emptyStateMessage="You have no Watch Later movies. You can add some on the home page."
       />

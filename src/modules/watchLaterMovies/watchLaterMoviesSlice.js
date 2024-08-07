@@ -51,32 +51,6 @@ const createWatchLaterThunk = (type) => {
   );
 };
 
-export const getWatchLaterMovies = createAsyncThunk(
-  "watchLaterMovies/getWatchLaterMovies",
-  async (rejectWithValue) => {
-    try {
-      const response = await fetch(
-        `${API_URL}/account/${ACCOUNT_ID}/watchlist/movies`,
-        {
-          headers: {
-            accept: "application/json",
-            Authorization: `Bearer ${BEARER_TOKEN}`,
-          },
-        },
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch Watch Later movies");
-      }
-
-      const data = await response.json();
-      return data.results;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  },
-);
-
 export const addWatchLaterMovie = createWatchLaterThunk("add");
 export const removeWatchLaterMovie = createWatchLaterThunk("remove");
 
@@ -92,22 +66,16 @@ const watchLaterMoviesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getWatchLaterMovies.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(getWatchLaterMovies.fulfilled, (state, action) => {
-        state.watchLaterMovies = action.payload;
-        state.status = "succeeded";
-      })
-      .addCase(getWatchLaterMovies.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload || "Failed to fetch Watch Later movies";
-      })
       .addCase(addWatchLaterMovie.pending, (state) => {
         state.status = "loading";
       })
       .addCase(addWatchLaterMovie.fulfilled, (state, action) => {
-        state.watchLaterMovies.push(action.payload);
+        const isDuplicateMovie = state.watchLaterMovies.some(
+          (movie) => movie.id === action.payload.id,
+        );
+        if (!isDuplicateMovie) {
+          state.watchLaterMovies.push(action.payload);
+        }
         state.status = "succeeded";
       })
       .addCase(addWatchLaterMovie.rejected, (state, action) => {
@@ -119,7 +87,7 @@ const watchLaterMoviesSlice = createSlice({
       })
       .addCase(removeWatchLaterMovie.fulfilled, (state, action) => {
         state.watchLaterMovies = state.watchLaterMovies.filter(
-          (movieId) => movieId !== action.payload,
+          (movie) => movie.id !== action.payload.id,
         );
         state.status = "succeeded";
       })
