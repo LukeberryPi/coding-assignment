@@ -1,15 +1,35 @@
-import { useEffect } from "react";
-
+import { useState, useEffect } from "react";
 import { Clock, Film, Search, Star } from "lucide-react";
-import { Link, NavLink } from "react-router-dom";
-
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
+import useDebounce from "../../hooks/useDebounce";
 import "./Header.scss";
 
-const Header = ({ searchMovies }) => {
+const Header = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const debouncedSearchQuery = useDebounce(searchQuery, 600);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (debouncedSearchQuery) {
+      navigate(`/search?q=${encodeURIComponent(debouncedSearchQuery)}`);
+    } else if (location.pathname === "/search" && !searchQuery) {
+      navigate("/");
+    }
+  }, [debouncedSearchQuery, navigate, location.pathname, searchQuery]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
   return (
     <header>
       <nav>
-        <Link to="/" className="nav-link">
+        <Link to="/" className="nav-link" onClick={() => handleNavigation("/")}>
           <div>
             <Film />
           </div>
@@ -23,7 +43,8 @@ const Header = ({ searchMovies }) => {
           <input
             type="search"
             id="search-movies"
-            onChange={(e) => searchMovies(e.target.value)}
+            onChange={handleSearchChange}
+            value={searchQuery}
             placeholder="Search movies..."
             aria-label="Search movies"
             aria-labelledby="search-movies"
@@ -31,13 +52,21 @@ const Header = ({ searchMovies }) => {
         </div>
 
         <div className="nav-link-container">
-          <NavLink className="nav-link" to="/favorite">
+          <NavLink
+            className="nav-link"
+            to="/favorite"
+            onClick={() => handleNavigation("/favorite")}
+          >
             <div>
               <Star />
             </div>
             <span>Favorites</span>
           </NavLink>
-          <NavLink className="nav-link" to="/watch-later">
+          <NavLink
+            className="nav-link"
+            to="/watch-later"
+            onClick={() => handleNavigation("/watch-later")}
+          >
             <div>
               <Clock />
             </div>

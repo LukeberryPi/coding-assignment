@@ -27,15 +27,13 @@ const PopularMoviesPage = () => {
   }
 
   return (
-    <>
-      <main>
-        <MovieGrid
-          title="Popular Movies"
-          emptyStateMessage="There are no popular movies to show."
-          movies={popularMovies}
-        />
-      </main>
-    </>
+    <main>
+      <MovieGrid
+        title="Popular Movies"
+        emptyStateMessage="There are no popular movies to show."
+        movies={popularMovies}
+      />
+    </main>
   );
 };
 

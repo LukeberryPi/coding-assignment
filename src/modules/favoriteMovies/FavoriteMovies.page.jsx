@@ -27,17 +27,13 @@ const FavoriteMoviesPage = () => {
   }
 
   return (
-    <>
-      <main>
-        {status === "succeeded" && (
-          <MovieGrid
-            title="Favorite Movies"
-            movies={favoriteMovies}
-            emptyStateMessage="You have no Favorite Movies. You can add some on the home page."
-          />
-        )}
-      </main>
-    </>
+    <main>
+      <MovieGrid
+        title="Favorite Movies"
+        movies={favoriteMovies}
+        emptyStateMessage="You have no Favorite Movies. You can add some on the home page."
+      />
+    </main>
   );
 };
 

@@ -4,12 +4,14 @@ import { thunk } from "redux-thunk";
 import favoriteMoviesReducer from "../modules/favoriteMovies/favoriteMoviesSlice";
 import popularMoviesReducer from "../modules/popularMovies/popularMoviesSlice";
 import watchLaterMoviesReducer from "../modules/watchLaterMovies/watchLaterMoviesSlice";
+import searchMoviesReducer from "../modules/searchMovies/searchMoviesSlice";
 
 const store = configureStore({
   reducer: {
     popularMovies: popularMoviesReducer,
     favoriteMovies: favoriteMoviesReducer,
     watchLaterMovies: watchLaterMoviesReducer,
+    searchedMovies: searchMoviesReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
 });

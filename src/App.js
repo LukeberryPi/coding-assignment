@@ -24,21 +24,13 @@ const App = () => {
 
   useEffect(() => {
     if (searchQuery && location.pathname !== "/search") {
-      navigate(`/search?q=${searchQuery}`);
+      navigate(`/search?q=${searchQuery}`, { replace: true });
     }
   }, [searchQuery, navigate, location.pathname]);
 
-  const searchMovies = (query) => {
-    if (!query) {
-      navigate("/");
-    }
-
-    navigate(`/search?q=${encodeURIComponent(query)}`);
-  };
-
   return (
     <>
-      <Header searchMovies={searchMovies} />
+      <Header />
       <Routes>
         <Route path="/" element={<PopularMoviesPage />} />
         <Route path="/search" element={<SearchMoviesPage />} />
