@@ -1,17 +1,21 @@
-// TrailerModal.js
+import { forwardRef, useImperativeHandle } from "react";
 
-import React from "react";
-
-import "./trailerModal.scss";
 import { X } from "lucide-react";
+import "./trailerModal.scss";
 
-const TrailerModal = ({ movieTitle, youtubeVideoId, isOpen, onClose }) => {
+const TrailerModal = forwardRef(({ movieTitle, youtubeVideoId, onClose }, ref) => {
   const getEmbedUrl = (videoId) => {
     return `https://www.youtube.com/embed/${videoId}`;
   };
 
+  useImperativeHandle(ref, () => ({
+    showModal: () => {
+      ref.current?.showModal();
+    }
+  }));
+
   return (
-    <dialog className="trailer-dialog">
+    <dialog ref={ref} className="trailer-dialog">
       <div className="trailer-dialog__header">
         <span>{movieTitle}</span>
         <button onClick={onClose} className="trailer-dialog__close-button">
@@ -29,6 +33,6 @@ const TrailerModal = ({ movieTitle, youtubeVideoId, isOpen, onClose }) => {
       ></iframe>
     </dialog>
   );
-};
+});
 
 export default TrailerModal;

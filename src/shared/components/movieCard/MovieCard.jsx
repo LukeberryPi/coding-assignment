@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState, forwardRef } from "react";
 
 import { Clock, Star } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,7 @@ import {
 import TrailerModal from "../trailerModal/trailerModal.jsx";
 import "./MovieCard.scss";
 
-const MovieCard = ({ movie }) => {
+const MovieCard = forwardRef(({ movie }, ref) => {
   const { id, poster_path, title } = movie;
 
   const dispatch = useDispatch();
@@ -25,7 +25,6 @@ const MovieCard = ({ movie }) => {
     (watchLater) => watchLater.id === id,
   );
 
-  const dialogRef = useRef(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [youtubeVideoId, setYoutubeVideoId] = useState("");
 
@@ -51,10 +50,11 @@ const MovieCard = ({ movie }) => {
     dispatch(addWatchLaterMovie(id));
   };
 
-  // @Todo: open modal with trailer dialog
   const handlePosterClick = () => {
-    dialogRef.current.showModal();
-    setIsDialogOpen(true);
+    if (ref.current) {
+      ref.current.showModal();
+      setIsDialogOpen(true);
+    }
   };
 
   const closeDialog = () => {
@@ -68,7 +68,7 @@ const MovieCard = ({ movie }) => {
           movieTitle={title}
           youtubeVideoId={youtubeVideoId}
           closeModal={setIsDialogOpen}
-          ref={dialogRef}
+          ref={ref}
           onClose={closeDialog}
         />
       )}
@@ -96,6 +96,6 @@ const MovieCard = ({ movie }) => {
       </div>
     </>
   );
-};
+});
 
 export default MovieCard;
