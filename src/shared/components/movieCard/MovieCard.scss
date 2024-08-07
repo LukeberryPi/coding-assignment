@@ -43,9 +43,16 @@
 
   &__title-container {
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: 1rem;
+    flex-grow: 1;
+    background-color: black;
   }
 
   &__title {
+    font-size: 1.2rem;
     font-weight: bold;
     margin-block: 1rem;
   }
@@ -54,6 +61,8 @@
     display: flex;
     margin-top: auto;
     bottom: 0;
+    border-radius: 0.5rem 0.5rem 0 0;
+    background-color: black;
 
     button {
       flex: 1;

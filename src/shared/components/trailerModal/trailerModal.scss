@@ -1,4 +1,5 @@
 dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
   overflow: hidden;
 }
 
@@ -9,10 +10,6 @@ body:has(dialog[open]) {
 
 dialog[open] {
   pointer-events: auto;
-}
-
-::backdrop {
-  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .trailer-dialog {
