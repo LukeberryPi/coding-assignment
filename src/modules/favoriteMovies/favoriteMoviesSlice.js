@@ -33,13 +33,13 @@ const createFavoriteThunk = (type) => {
 
   return createAsyncThunk(
     `favoriteMovies/${typePrefixMap[type]}`,
-    async (movieId, { rejectWithValue }) => {
+    async (movie, { rejectWithValue }) => {
       try {
         const response = await fetch(url, {
           ...options,
           body: JSON.stringify({
             media_type: "movie",
-            media_id: movieId,
+            media_id: movie.id,
             favorite: boolMap[type],
           }),
         });
@@ -48,39 +48,13 @@ const createFavoriteThunk = (type) => {
           throw new Error(`Failed to ${type} favorite movie`);
         }
 
-        return movieId;
+        return movie;
       } catch (error) {
         return rejectWithValue(error.message);
       }
     },
   );
 };
-
-export const getFavoriteMovies = createAsyncThunk(
-  "favoriteMovies/getFavoriteMovies",
-  async (rejectWithValue) => {
-    try {
-      const response = await fetch(
-        `${API_URL}/account/${ACCOUNT_ID}/favorite/movies`,
-        {
-          headers: {
-            accept: "application/json",
-            Authorization: `Bearer ${BEARER_TOKEN}`,
-          },
-        },
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch Favorite movies");
-      }
-
-      const data = await response.json();
-      return data.results;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  },
-);
 
 export const addFavoriteMovie = createFavoriteThunk("add");
 export const removeFavoriteMovie = createFavoriteThunk("remove");
@@ -97,23 +71,15 @@ const favoriteMoviesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getFavoriteMovies.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(getFavoriteMovies.fulfilled, (state, action) => {
-        state.favoriteMovies = action.payload;
-        state.status = "succeeded";
-      })
-      .addCase(getFavoriteMovies.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload || "Failed to fetch Favorite movies";
-      })
       .addCase(addFavoriteMovie.pending, (state) => {
         state.status = "loading";
       })
       .addCase(addFavoriteMovie.fulfilled, (state, action) => {
-        if (!state.favoriteMovies.includes(action.payload.movieId)) {
-          state.favoriteMovies.push(action.payload.movieId);
+        const isDuplicate = state.favoriteMovies.some(
+          (movie) => movie.id === action.payload.id,
+        );
+        if (!isDuplicate) {
+          state.favoriteMovies.push(action.payload);
         }
         state.status = "succeeded";
       })
@@ -126,7 +92,7 @@ const favoriteMoviesSlice = createSlice({
       })
       .addCase(removeFavoriteMovie.fulfilled, (state, action) => {
         state.favoriteMovies = state.favoriteMovies.filter(
-          (movieId) => movieId !== action.payload,
+          (movie) => movie.id !== action.payload.id,
         );
         state.status = "succeeded";
       })

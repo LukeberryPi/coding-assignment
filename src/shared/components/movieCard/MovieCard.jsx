@@ -20,11 +20,11 @@ const MovieCard = ({ movie, onPosterClick }) => {
   };
 
   const handleStarClick = () => {
-    dispatch(addWatchLaterMovie(movie));
+    dispatch(addFavoriteMovie(movie));
   };
 
   const handleClockClick = () => {
-    dispatch(removeWatchLaterMovie(movie));
+    dispatch(removeFavoriteMovie(movie));
   };
 
   return (
@@ -49,12 +49,12 @@ const MovieCard = ({ movie, onPosterClick }) => {
         </div>
         <div className="movie-card__actions">
           <button onClick={handleStarClick}>
-            <Clock />
+            <Star />
             add
             {/* <span>{isFavoriteMovie ? "Remove" : "Add"}</span> */}
           </button>
           <button onClick={handleClockClick}>
-            <Clock />
+            <Star />
             remove
             {/* <span>{isWatchLaterMovie ? "Remove" : "Add"}</span> */}
           </button>
