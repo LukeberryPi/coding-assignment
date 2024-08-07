@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
 import { Clock, Film, Search, Star } from "lucide-react";
-import { Link, NavLink, useNavigate, useLocation, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  useNavigate,
+  useLocation,
+  useSearchParams,
+} from "react-router-dom";
 import useDebounce from "../../hooks/useDebounce";
 import "./Header.scss";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const debouncedSearchQuery = useDebounce((searchQuery || ""), 600);
+  const debouncedSearchQuery = useDebounce(searchQuery || "", 600);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -23,7 +29,7 @@ const Header = () => {
   };
 
   const handleNavigation = (path) => {
-    setSearchQuery("")
+    setSearchQuery("");
     navigate(path);
   };
 
@@ -31,9 +37,7 @@ const Header = () => {
     <header>
       <nav>
         <Link to="/" className="nav-link" onClick={() => handleNavigation("/")}>
-          <div>
-            <Film />
-          </div>
+          <Film />
           <span className="logo-text">Movieland</span>
         </Link>
 
@@ -58,9 +62,7 @@ const Header = () => {
             to="/favorite"
             onClick={() => handleNavigation("/favorite")}
           >
-            <div>
-              <Star />
-            </div>
+            <Star />
             <span>Favorites</span>
           </NavLink>
           <NavLink
@@ -68,9 +70,7 @@ const Header = () => {
             to="/watch-later"
             onClick={() => handleNavigation("/watch-later")}
           >
-            <div>
-              <Clock />
-            </div>
+            <Clock />
             <span>Watch Later</span>
           </NavLink>
         </div>

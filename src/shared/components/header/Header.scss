@@ -2,14 +2,14 @@ header {
   position: fixed;
   width: 100%;
   z-index: 10;
-  background: black;
+  background-color: black;
 
   nav {
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
     .logo-text {
       font-size: 1.5rem;
       font-weight: bold;
@@ -31,7 +31,7 @@ header {
       padding-block: 0.5rem;
       align-items: center;
       &:hover {
-        opacity: 80%;
+        opacity: 60%;
       }
       &.active {
         border-bottom: 2px solid white;
