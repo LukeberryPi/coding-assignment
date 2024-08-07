@@ -1,6 +1,4 @@
-import { useState, useRef } from "react";
-
-import { Clock, Star } from "lucide-react";
+import { Clock, Play, Star } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -48,12 +46,19 @@ const MovieCard = ({ movie, onPosterClick }) => {
 
   return (
     <div className="movie-card">
-      <button onClick={() => onPosterClick(movie)}>
+      <button
+        onClick={() => onPosterClick(movie)}
+        className="movie-card__poster-button"
+      >
         <img
           className="movie-card__image"
           src={getImageURL(poster_path)}
           alt={`${title} poster`}
         />
+        <div className="movie-card__overlay">
+          <Play />
+          View Trailer
+        </div>
       </button>
       <div className="movie-card__title-container">
         <p className="movie-card__title">{title}</p>

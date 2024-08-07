@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { EmptyState } from "../../../shared/components/emptyState/EmptyState.jsx";
 import MovieCard from "../movieCard/MovieCard.jsx";
 import TrailerModal from "../trailerModal/trailerModal.jsx";
+import getMovieTrailer from "../../services/getMovieTrailer";
 import "./MovieGrid.scss";
 
 const MovieGrid = ({ movies, title, emptyStateMessage }) => {
@@ -13,8 +14,14 @@ const MovieGrid = ({ movies, title, emptyStateMessage }) => {
   const noMovies = movies.length === 0;
   const isHomePage = window.location.pathname === "/";
 
-  const openTrailerModal = (movie) => {
+  const openTrailerModal = async (movie) => {
     setSelectedMovie(movie);
+    const trailerKey = await getMovieTrailer(movie.id);
+    if (!trailerKey) {
+      console.error("No trailer found for this movie");
+      return;
+    }
+    setSelectedMovie({ ...movie, youtubeVideoId: trailerKey });
     setIsDialogOpen(true);
   };
 

@@ -1,3 +1,16 @@
+dialog::backdrop {
+  overflow: hidden;
+}
+
+body:has(dialog[open]) {
+  overflow: hidden;
+  pointer-events: none;
+}
+
+dialog[open] {
+  pointer-events: auto;
+}
+
 ::backdrop {
   background-color: rgba(0, 0, 0, 0.8);
 }
