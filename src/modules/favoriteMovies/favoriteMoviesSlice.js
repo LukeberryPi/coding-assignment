@@ -47,7 +47,7 @@ const createFavoriteThunk = (type) => {
         if (!response.ok) {
           throw new Error(`Failed to ${type} favorite movie`);
         }
-        
+
         return movieId;
       } catch (error) {
         return rejectWithValue(error.message);
@@ -58,10 +58,10 @@ const createFavoriteThunk = (type) => {
 
 export const getFavoriteMovies = createAsyncThunk(
   "favoriteMovies/getFavoriteMovies",
-  async (pageParam = 1, { rejectWithValue }) => {
+  async (rejectWithValue) => {
     try {
       const response = await fetch(
-        `${API_URL}/account/${ACCOUNT_ID}/favorite/movies?page=${pageParam}`,
+        `${API_URL}/account/${ACCOUNT_ID}/favorite/movies`,
         {
           headers: {
             accept: "application/json",
@@ -69,6 +69,11 @@ export const getFavoriteMovies = createAsyncThunk(
           },
         },
       );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch Favorite movies");
+      }
+
       const data = await response.json();
       return data.results;
     } catch (error) {

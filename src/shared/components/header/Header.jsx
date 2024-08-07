@@ -1,12 +1,6 @@
 import { useState, useEffect } from "react";
 import { Clock, Film, Search, Star } from "lucide-react";
-import {
-  Link,
-  NavLink,
-  useNavigate,
-  useLocation,
-  useSearchParams,
-} from "react-router-dom";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import useDebounce from "../../hooks/useDebounce";
 import "./Header.scss";
 
@@ -24,11 +18,12 @@ const Header = () => {
     }
   }, [debouncedSearchQuery, navigate, location.pathname, searchQuery]);
 
-  const handleSearchChange = (e) => {
+  const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
 
   const handleNavigation = (path) => {
+    // @Todo: it only reroutes after debounce, should be instant
     setSearchQuery("");
     navigate(path);
   };
@@ -48,7 +43,7 @@ const Header = () => {
           <input
             type="search"
             id="search-movies"
-            onChange={handleSearchChange}
+            onChange={handleSearch}
             value={searchQuery}
             placeholder="Search movies..."
             aria-label="Search movies"

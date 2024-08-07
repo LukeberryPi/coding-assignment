@@ -53,10 +53,10 @@ const createWatchLaterThunk = (type) => {
 
 export const getWatchLaterMovies = createAsyncThunk(
   "watchLaterMovies/getWatchLaterMovies",
-  async (pageParam = 1, { rejectWithValue }) => {
+  async (rejectWithValue) => {
     try {
       const response = await fetch(
-        `${API_URL}/account/${ACCOUNT_ID}/watchlist/movies?page=${pageParam}`,
+        `${API_URL}/account/${ACCOUNT_ID}/watchlist/movies`,
         {
           headers: {
             accept: "application/json",
@@ -64,6 +64,11 @@ export const getWatchLaterMovies = createAsyncThunk(
           },
         },
       );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch Watch Later movies");
+      }
+
       const data = await response.json();
       return data.results;
     } catch (error) {

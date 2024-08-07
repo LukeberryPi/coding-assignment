@@ -12,36 +12,19 @@ import {
 import "./MovieCard.scss";
 
 const MovieCard = ({ movie, onPosterClick }) => {
-  const { id, poster_path, title } = movie;
-
   const dispatch = useDispatch();
-  const { favoriteMovies } = useSelector((state) => state.favoriteMovies);
-  const isFavoriteMovie = favoriteMovies.some((favorite) => favorite.id === id);
-  const { watchLaterMovies } = useSelector((state) => state.watchLaterMovies);
-  const isWatchLaterMovie = watchLaterMovies.some(
-    (watchLater) => watchLater.id === id,
-  );
+  const { id, poster_path, title } = movie;
 
   const getImageURL = (poster_path) => {
     return `https://image.tmdb.org/t/p/w500/${poster_path}`;
   };
 
   const handleStarClick = () => {
-    if (isFavoriteMovie) {
-      dispatch(removeFavoriteMovie(id));
-      return;
-    }
-
-    dispatch(addFavoriteMovie(id));
+    dispatch(removeFavoriteMovie(id));
   };
 
   const handleClockClick = () => {
-    if (isWatchLaterMovie) {
-      dispatch(removeWatchLaterMovie(id));
-      return;
-    }
-
-    dispatch(addWatchLaterMovie(id));
+    dispatch(removeWatchLaterMovie(id));
   };
 
   return (
@@ -67,11 +50,11 @@ const MovieCard = ({ movie, onPosterClick }) => {
         <div className="movie-card__actions">
           <button onClick={handleStarClick}>
             <Star />
-            <span>{isFavoriteMovie ? "Remove" : "Add"}</span>
+            {/* <span>{isFavoriteMovie ? "Remove" : "Add"}</span> */}
           </button>
           <button onClick={handleClockClick}>
             <Clock />
-            <span>{isWatchLaterMovie ? "Remove" : "Add"}</span>
+            {/* <span>{isWatchLaterMovie ? "Remove" : "Add"}</span> */}
           </button>
         </div>
       </div>

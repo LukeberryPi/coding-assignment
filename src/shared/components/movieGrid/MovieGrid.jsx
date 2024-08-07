@@ -7,9 +7,9 @@ import getMovieTrailer from "../../services/getMovieTrailer";
 import "./MovieGrid.scss";
 
 const MovieGrid = ({ movies, title, emptyStateMessage }) => {
+  const dialogRef = useRef(null);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const dialogRef = useRef(null);
 
   const noMovies = movies.length === 0;
   const isHomePage = window.location.pathname === "/";
