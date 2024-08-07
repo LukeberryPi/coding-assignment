@@ -31,7 +31,7 @@ header {
       padding-block: 0.5rem;
       align-items: center;
       &:hover {
-        opacity: 60%;
+        opacity: var(--hover-opacity);
       }
       &.active {
         border-bottom: 2px solid white;
@@ -61,7 +61,7 @@ header {
     padding: 0.5rem 1rem;
     background: inherit;
     border: white 1px solid;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     outline: none;
 
     @media (max-width: 768px) {

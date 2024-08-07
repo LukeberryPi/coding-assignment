@@ -13,7 +13,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: var(--header-height);
+  padding-block: var(--header-height);
   min-height: 100vh;
   width: 100%;
 }

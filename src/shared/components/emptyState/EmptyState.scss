@@ -8,11 +8,11 @@
   gap: 1rem;
   &__anchor {
     padding: 0.5rem 1rem;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     background-color: white;
     color: var(--secondary-color);
     &:hover {
-      opacity: 60%;
+      opacity: var(--hover-opacity);
     }
   }
 }
