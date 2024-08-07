@@ -4,6 +4,7 @@
   height: 100%;
   border-radius: 0.5rem;
   overflow: hidden;
+  background-color: black;
 
   &__poster-button {
     position: relative;
@@ -42,28 +43,33 @@
     }
   }
 
+  &__details-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: black;
+  }
+
   &__title-container {
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-block: 1rem;
+    padding: 1rem;
     flex-grow: 1;
-    background-color: black;
   }
 
   &__title {
     font-size: 1.2rem;
+    line-clamp: 1;
+    text-overflow: ellipsis;
     font-weight: bold;
     margin-block: 1rem;
   }
 
   &__actions {
     display: flex;
-    margin-top: auto;
     bottom: 0;
-    border-radius: 0.5rem 0.5rem 0 0;
-    background-color: black;
 
     button {
       flex: 1;

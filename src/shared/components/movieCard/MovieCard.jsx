@@ -60,18 +60,20 @@ const MovieCard = ({ movie, onPosterClick }) => {
           View Trailer
         </div>
       </button>
-      <div className="movie-card__title-container">
-        <p className="movie-card__title">{title}</p>
-      </div>
-      <div className="movie-card__actions">
-        <button onClick={handleStarClick}>
-          <Star />
-          <span>{isFavoriteMovie ? "Remove" : "Add"}</span>
-        </button>
-        <button onClick={handleClockClick}>
-          <Clock />
-          <span>{isWatchLaterMovie ? "Remove" : "Add"}</span>
-        </button>
+      <div className="movie-card__details-container">
+        <div className="movie-card__title-container">
+          <p className="movie-card__title">{title}</p>
+        </div>
+        <div className="movie-card__actions">
+          <button onClick={handleStarClick}>
+            <Star />
+            <span>{isFavoriteMovie ? "Remove" : "Add"}</span>
+          </button>
+          <button onClick={handleClockClick}>
+            <Clock />
+            <span>{isWatchLaterMovie ? "Remove" : "Add"}</span>
+          </button>
+        </div>
       </div>
     </div>
   );
