@@ -33,17 +33,17 @@ const createWatchLaterThunk = (type) => {
 
   return createAsyncThunk(
     `watchLaterMovies/${typePrefixMap[type]}`,
-    async (movieId, { rejectWithValue }) => {
+    async (movie, { rejectWithValue }) => {
       try {
         await fetch(url, {
           ...options,
           body: JSON.stringify({
             media_type: "movie",
-            media_id: movieId,
+            media_id: movie.id,
             watchlist: boolMap[type],
           }),
         });
-        return movieId;
+        return movie;
       } catch (error) {
         return rejectWithValue(error.message);
       }
@@ -107,9 +107,7 @@ const watchLaterMoviesSlice = createSlice({
         state.status = "loading";
       })
       .addCase(addWatchLaterMovie.fulfilled, (state, action) => {
-        if (!state.watchLaterMovies.includes(action.payload.movieId)) {
-          state.watchLaterMovies.push(action.payload.movieId);
-        }
+        state.watchLaterMovies.push(action.payload);
         state.status = "succeeded";
       })
       .addCase(addWatchLaterMovie.rejected, (state, action) => {
