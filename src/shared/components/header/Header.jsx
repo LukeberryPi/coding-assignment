@@ -35,13 +35,13 @@ const Header = ({ searchMovies }) => {
             <div>
               <Star />
             </div>
-            Favorites
+            <span>Favorites</span>
           </NavLink>
           <NavLink className="nav-link" to="/watch-later">
             <div>
               <Clock />
             </div>
-            Watch Later
+            <span>Watch Later</span>
           </NavLink>
         </div>
       </nav>

@@ -23,6 +23,7 @@ body {
   color: white;
   height: 100%;
   font-family: Arial, sans-serif;
+  width: 100%;
   background-color: var(--secondary-color);
 }
 
