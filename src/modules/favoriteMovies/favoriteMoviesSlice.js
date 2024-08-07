@@ -35,7 +35,7 @@ const createFavoriteThunk = (type) => {
     `favoriteMovies/${typePrefixMap[type]}`,
     async (movieId, { rejectWithValue }) => {
       try {
-        await fetch(url, {
+        const response = await fetch(url, {
           ...options,
           body: JSON.stringify({
             media_type: "movie",
@@ -43,6 +43,11 @@ const createFavoriteThunk = (type) => {
             favorite: boolMap[type],
           }),
         });
+
+        if (!response.ok) {
+          throw new Error(`Failed to ${type} favorite movie`);
+        }
+        
         return movieId;
       } catch (error) {
         return rejectWithValue(error.message);

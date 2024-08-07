@@ -1,11 +1,8 @@
-// when scroll hits the bottom of the patch dispatch getPopularMovies with pageParam + 1
-
 import { useEffect, useCallback } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
-// @Todo: add inifinite scroll slice
-import { fetchMoreItems } from "./infiniteScrollSlice";
+import { getMoreMovies } from "./infiniteScrollSlice";
 
 export const useInfiniteScroll = () => {
   const dispatch = useDispatch();
@@ -15,7 +12,7 @@ export const useInfiniteScroll = () => {
 
   const loadMore = useCallback(() => {
     if (!loading && hasMore) {
-      dispatch(fetchMoreItems(page));
+      dispatch(getMoreMovies(page));
     }
   }, [dispatch, loading, hasMore, page]);
 
