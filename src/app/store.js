@@ -7,7 +7,6 @@ import favoriteMoviesReducer from "../modules/favoriteMovies/favoriteMoviesSlice
 import popularMoviesReducer from "../modules/popularMovies/popularMoviesSlice";
 import watchLaterMoviesReducer from "../modules/watchLaterMovies/watchLaterMoviesSlice";
 import searchMoviesReducer from "../modules/searchMovies/searchMoviesSlice";
-import infiniteScrollReducer from "../shared/hooks/infiniteScrollSlice";
 
 const persistConfig = {
   key: "root",
@@ -20,7 +19,6 @@ const rootReducer = combineReducers({
   favoriteMovies: favoriteMoviesReducer,
   watchLaterMovies: watchLaterMoviesReducer,
   searchedMovies: searchMoviesReducer,
-  infiniteScroll: infiniteScrollReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

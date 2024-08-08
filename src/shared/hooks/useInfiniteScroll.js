@@ -1,35 +1,29 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import { getMoreMovies } from "./infiniteScrollSlice";
-
-export const useInfiniteScroll = () => {
+export const useInfiniteScroll = (actionToDispatch) => {
   const dispatch = useDispatch();
-  const { items, page, hasMore, loading, error } = useSelector(
-    (state) => state.infiniteScroll,
-  );
+  const [hasReachedBottom, setHasReachedBottom] = useState(false);
 
-  const loadMore = useCallback(() => {
-    if (!loading && hasMore) {
-      dispatch(getMoreMovies(page));
-    }
-  }, [dispatch, loading, hasMore, page]);
-
-  const hasReachedBottom =
-    window.innerHeight + document.documentElement.scrollTop ===
-    document.documentElement.offsetHeight;
+  if (!(actionToDispatch instanceof Function)) {
+    throw new Error("actionToDispatch must be a function");
+  }
 
   useEffect(() => {
     const handleScroll = () => {
+      const reachedBottom =
+        window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight;
+      setHasReachedBottom(reachedBottom);
       if (hasReachedBottom) {
-        loadMore();
+        dispatch(actionToDispatch());
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [loadMore, hasReachedBottom]);
+  }, [dispatch, actionToDispatch, hasReachedBottom]);
 
-  return { items, loading, error, hasMore };
+  return {};
 };
