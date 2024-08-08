@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   justify-items: center;
-  gap: 1rem;
+  gap: 2rem 1rem;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -28,7 +28,7 @@
 
   &__title {
     font-size: clamp(3rem, 5vw, 4rem);
-    padding-inline: 1rem;
+    padding-inline: 2rem;
     font-weight: bold;
     text-align: center;
   }
