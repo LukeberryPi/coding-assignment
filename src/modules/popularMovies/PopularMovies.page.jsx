@@ -7,20 +7,27 @@ import LoadingState from "../../shared/components/loadingState/LoadingState.jsx"
 import MovieGrid from "../../shared/components/movieGrid/MovieGrid.jsx";
 
 import { getPopularMovies } from "./popularMoviesSlice.js";
+import { useInfiniteScroll } from "../../shared/hooks/useInfiniteScroll.js";
 
 const PopularMoviesPage = () => {
   const dispatch = useDispatch();
-  const { popularMovies, status, error } = useSelector(
+  const { popularMovies, currentPage, hasMore, status, error } = useSelector(
     (state) => state.popularMovies,
   );
 
-  useEffect(() => {
-    dispatch(getPopularMovies());
-  }, [dispatch]);
+  const { hasReachedBottom } = useInfiniteScroll();
 
-  if (status === "loading") {
-    return <LoadingState />;
-  }
+  useEffect(() => {
+    if (popularMovies.length === 0) {
+      dispatch(getPopularMovies(1));
+    } else if (hasReachedBottom && hasMore) {
+      dispatch(getPopularMovies(currentPage + 1));
+    }
+  }, [dispatch, popularMovies, hasReachedBottom, hasMore, currentPage, status]);
+
+  // if (status === "loading") {
+  //   return <LoadingState />;
+  // }
 
   if (status === "failed") {
     return <ErrorState error={error} />;

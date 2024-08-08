@@ -1,29 +1,21 @@
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { useDispatch } from "react-redux";
-
-export const useInfiniteScroll = (actionToDispatch) => {
-  const dispatch = useDispatch();
+export const useInfiniteScroll = () => {
   const [hasReachedBottom, setHasReachedBottom] = useState(false);
-
-  if (!(actionToDispatch instanceof Function)) {
-    throw new Error("actionToDispatch must be a function");
-  }
 
   useEffect(() => {
     const handleScroll = () => {
-      const reachedBottom =
-        window.innerHeight + document.documentElement.scrollTop ===
-        document.documentElement.offsetHeight;
+      const scrollHeight = document.documentElement.scrollHeight;
+      const scrollTop = document.documentElement.scrollTop;
+      const clientHeight = document.documentElement.clientHeight;
+
+      const reachedBottom = scrollTop + clientHeight >= scrollHeight;
       setHasReachedBottom(reachedBottom);
-      if (hasReachedBottom) {
-        dispatch(actionToDispatch());
-      }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [dispatch, actionToDispatch, hasReachedBottom]);
+  }, [hasReachedBottom]);
 
-  return {};
+  return { hasReachedBottom };
 };
