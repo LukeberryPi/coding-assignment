@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
-import { Clock, Film, Search, Star } from "lucide-react";
+import { Clock, Film, Search, Star, X } from "lucide-react";
 
 import useDebounce from "../../hooks/useDebounce";
 import "./Header.scss";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const debouncedSearchQuery = useDebounce(searchQuery || "", 600);
   const navigate = useNavigate();
   const location = useLocation();
@@ -30,32 +31,51 @@ const Header = () => {
     navigate(path);
   };
 
+  const toggleMobileSearch = () => {
+    setMobileSearchOpen((prev) => !prev);
+  };
+
   return (
-    <header>
-      <nav>
-        <Link to="/" className="nav-link" onClick={() => handleNavigation("/")}>
+    <header className="header">
+      <nav className="header__nav">
+        <Link
+          to="/"
+          className="header__nav-link"
+          onClick={() => handleNavigation("/")}
+        >
           <Film />
-          <span className="logo-text">Movieland</span>
+          <span className="header__nav-logo-text">Movieland</span>
         </Link>
 
-        <div className="search-container">
-          <label htmlFor="search-movies">
+        <div className="header__search-container">
+          <label htmlFor="search-movies" className="header__search-label">
             <Search />
           </label>
           <input
             type="search"
             id="search-movies"
+            className="header__search-input"
             onChange={handleSearch}
             value={searchQuery}
             placeholder="Search movies..."
+            data-mobile-search-open={mobileSearchOpen}
             aria-label="Search movies"
             aria-labelledby="search-movies"
           />
+          <button onClick={toggleMobileSearch}>
+            <X />
+          </button>
         </div>
 
-        <div className="nav-link-container">
+        <div className="header__nav-link-container">
+          <button
+            className="header__search-nav-button"
+            onClick={toggleMobileSearch}
+          >
+            <Search />
+          </button>
           <NavLink
-            className="nav-link"
+            className="header__nav-link"
             to="/favorite"
             onClick={() => handleNavigation("/favorite")}
           >
@@ -63,7 +83,7 @@ const Header = () => {
             <span>Favorites</span>
           </NavLink>
           <NavLink
-            className="nav-link"
+            className="header__nav-link"
             to="/watch-later"
             onClick={() => handleNavigation("/watch-later")}
           >

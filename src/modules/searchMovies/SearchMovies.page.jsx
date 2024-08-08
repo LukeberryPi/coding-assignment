@@ -32,7 +32,7 @@ const SearchMoviesPage = () => {
   }
 
   return (
-    <main className="main">
+    <main className="main-container">
       <MovieGrid
         title={`Search: ${searchQuery}`}
         emptyStateMessage="No movies matched your search. Try searching for something else."
