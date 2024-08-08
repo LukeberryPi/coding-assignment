@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import { API_URL } from "../../shared/utils/constants";
+import { API_URL, BEARER_TOKEN } from "../../shared/utils/constants";
 
 export const getPopularMovies = createAsyncThunk(
   "popularMovies/getPopularMovie",
@@ -11,7 +11,7 @@ export const getPopularMovies = createAsyncThunk(
         {
           headers: {
             accept: "application/json",
-            Authorization: `Bearer ${process.env.REACT_APP_BEARER_TOKEN}`,
+            Authorization: `Bearer ${BEARER_TOKEN}`,
           },
         },
       );

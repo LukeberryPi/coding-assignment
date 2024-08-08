@@ -16,12 +16,10 @@ const PopularMoviesPage = () => {
   );
 
   const isLoading = status === "loading";
-  console.log(currentPage);
-  console.log(isLoading);
 
   useEffect(() => {
     if (popularMovies.length === 0 && !isLoading) {
-      dispatch(getPopularMovies(1));
+      dispatch(getPopularMovies(currentPage));
     } else if (hasReachedBottom && hasMore && !isLoading) {
       dispatch(getPopularMovies(currentPage + 1));
     }
