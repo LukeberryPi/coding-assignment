@@ -18,7 +18,7 @@ const FavoriteMoviesPage = () => {
   }
 
   return (
-    <main>
+    <main className="main-container">
       <MovieGrid
         title="Favorite Movies"
         movies={favoriteMovies}

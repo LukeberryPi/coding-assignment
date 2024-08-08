@@ -27,7 +27,7 @@ const PopularMoviesPage = () => {
   }
 
   return (
-    <main>
+    <main className="main-container">
       <MovieGrid
         title="Popular Movies"
         emptyStateMessage="There are no popular movies to show."

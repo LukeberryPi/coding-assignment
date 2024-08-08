@@ -18,7 +18,7 @@ const WatchLaterPage = () => {
   }
 
   return (
-    <main>
+    <main className="main-container">
       <MovieGrid
         title="Watch Later"
         movies={watchLaterMovies}
