@@ -35,7 +35,7 @@ const createWatchLaterThunk = (type) => {
     `watchLaterMovies/${typePrefixMap[type]}`,
     async (movie, { rejectWithValue }) => {
       try {
-        await fetch(url, {
+        const response = await fetch(url, {
           ...options,
           body: JSON.stringify({
             media_type: "movie",
@@ -43,6 +43,11 @@ const createWatchLaterThunk = (type) => {
             watchlist: boolMap[type],
           }),
         });
+
+        if (!response.ok) {
+          throw new Error(`Failed to ${type} movie from Watch Later`);
+        }
+
         return movie;
       } catch (error) {
         return rejectWithValue(error.message);
