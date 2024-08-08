@@ -21,10 +21,10 @@ const PopularMoviesPage = () => {
   );
 
   const isLoading = status === "loading";
-  console.log(BEARER_TOKEN, ACCOUNT_ID, API_URL);
 
   useEffect(() => {
     if (popularMovies.length === 0 && !isLoading) {
+      console.log(BEARER_TOKEN, ACCOUNT_ID, API_URL);
       dispatch(getPopularMovies(currentPage));
     } else if (hasReachedBottom && hasMore && !isLoading) {
       dispatch(getPopularMovies(currentPage + 1));

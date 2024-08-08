@@ -20,7 +20,7 @@ const WatchLaterPage = () => {
   return (
     <main className="main-container">
       <MovieGrid
-        title="Watch Later"
+        title="Watch Later Movies"
         movies={watchLaterMovies}
         emptyStateMessage="You have no Watch Later movies. You can add some on the home page."
       />
