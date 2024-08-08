@@ -1,8 +1,9 @@
+import { configureStore } from "@reduxjs/toolkit";
+
 import favoriteMoviesReducer, {
   addFavoriteMovie,
   removeFavoriteMovie,
 } from "./favoriteMoviesSlice";
-import { configureStore } from "@reduxjs/toolkit";
 
 global.fetch = jest.fn();
 

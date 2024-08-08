@@ -1,12 +1,13 @@
+import { configureStore } from "@reduxjs/toolkit";
+
 import watchLaterMoviesReducer, {
   addWatchLaterMovie,
   removeWatchLaterMovie,
 } from "./watchLaterMoviesSlice";
-import { configureStore } from "@reduxjs/toolkit";
 
 global.fetch = jest.fn();
 
-describe("watchLaterMoviesSlice", () => {
+describe("favorite movies slice", () => {
   let store;
 
   beforeEach(() => {
@@ -25,8 +26,9 @@ describe("watchLaterMoviesSlice", () => {
 
   it("should handle addWatchLaterMovie.fulfilled", async () => {
     const movie = { id: 1, title: "Test Movie" };
-    await store.dispatch(addWatchLaterMovie(movie));
+
     global.fetch.mockResolvedValueOnce({ ok: true });
+    await store.dispatch(addWatchLaterMovie(movie));
 
     const state = store.getState().watchLaterMovies;
     expect(state.watchLaterMovies).toContainEqual(movie);
@@ -35,10 +37,12 @@ describe("watchLaterMoviesSlice", () => {
 
   it("should handle removeWatchLaterMovie.fulfilled", async () => {
     const movie = { id: 1, title: "Test Movie" };
-    global.fetch.mockResolvedValueOnce({ ok: true });
 
+    global.fetch.mockResolvedValueOnce({ ok: true });
     await store.dispatch(addWatchLaterMovie(movie));
-    await store.dispatch(removeWatchLaterMovie(movie.id));
+
+    global.fetch.mockResolvedValueOnce({ ok: true });
+    await store.dispatch(removeWatchLaterMovie(movie));
 
     const state = store.getState().watchLaterMovies;
     expect(state.watchLaterMovies).not.toContainEqual(movie);
