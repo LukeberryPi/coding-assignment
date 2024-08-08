@@ -21,7 +21,8 @@ export const getPopularMovies = createAsyncThunk(
       }
 
       const data = await response.json();
-      return data.results;
+      const { results, total_pages: totalPages, page } = data;
+      return { results, totalPages, page };
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -30,6 +31,9 @@ export const getPopularMovies = createAsyncThunk(
 
 const initialState = {
   popularMovies: [],
+  totalPages: null,
+  currentPage: 1,
+  hasMore: true,
   status: "idle",
   error: null,
 };
@@ -44,8 +48,16 @@ const popularMoviesSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getPopularMovies.fulfilled, (state, action) => {
-        state.popularMovies = action.payload;
         state.status = "succeeded";
+        state.popularMovies = [
+          ...state.popularMovies,
+          ...action.payload.results,
+        ];
+        state.currentPage = action.payload.page;
+        if (state.totalPages !== action.payload.totalPages) {
+          state.totalPages = action.payload.totalPages;
+        }
+        state.hasMore = state.currentPage < state.totalPages;
       })
       .addCase(getPopularMovies.rejected, (state, action) => {
         state.status = "failed";
