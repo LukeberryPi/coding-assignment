@@ -53,6 +53,19 @@ const MovieCard = ({ movie, onPosterClick }) => {
         onClick={() => onPosterClick(movie)}
         className="movie-card__poster-button"
       >
+        {isFavoriteMovie && (
+          <Star
+            className="movie-card__icon movie-card__icon--top-left"
+            fill="orange"
+            color="orange"
+          />
+        )}
+        {isWatchLaterMovie && (
+          <Clock
+            className="movie-card__icon movie-card__icon--top-right"
+            color="blueviolet"
+          />
+        )}
         {hasPoster ? (
           <img
             className="movie-card__image"
