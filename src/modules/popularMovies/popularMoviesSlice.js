@@ -48,11 +48,11 @@ const popularMoviesSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getPopularMovies.fulfilled, (state, action) => {
+        state.status = "succeeded";
         state.popularMovies = [
           ...state.popularMovies,
           ...action.payload.results,
         ];
-        state.status = "succeeded";
         state.currentPage = action.payload.page;
         if (state.totalPages !== action.payload.totalPages) {
           state.totalPages = action.payload.totalPages;
