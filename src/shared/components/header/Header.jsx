@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { Clock, Film, Search, Star, X } from "lucide-react";
+import { Clock, Film, Search, Star } from "lucide-react";
 
 import "./Header.scss";
 
@@ -57,9 +57,7 @@ const Header = () => {
             aria-label="Search movies"
             aria-labelledby="search-movies"
           />
-          <button onClick={toggleMobileSearch}>
-            Close
-          </button>
+          <button onClick={toggleMobileSearch}>Close</button>
         </div>
 
         <div className="header__nav-link-container">
