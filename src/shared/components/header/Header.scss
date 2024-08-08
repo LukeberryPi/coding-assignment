@@ -1,40 +1,75 @@
-header {
+.header {
   position: fixed;
   width: 100%;
   z-index: 10;
-  background: black;
+  background-color: black;
+  font-weight: bold;
 
-  nav {
+  &:has(input[data-mobile-search-open="true"]) {
+    a {
+      display: none;
+    }
+
+    .header__search-nav-button {
+      display: none;
+    }
+  }
+
+  a,
+  button {
+    color: white;
+  }
+
+  &__search-nav-button {
+    color: white;
+    display: none;
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+  }
+
+  &__nav {
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
-    .logo-text {
+    &-logo-text {
       font-size: 1.5rem;
       font-weight: bold;
+
+      @media (max-width: 979px) {
+        display: none;
+      }
     }
 
-    .nav-link-container {
+    &-link-container {
       display: flex;
       align-items: center;
       gap: 2rem;
     }
 
-    .nav-link {
+    &-link {
       display: flex;
       gap: 0.75rem;
       padding-block: 0.5rem;
       align-items: center;
       &:hover {
-        opacity: 80%;
+        opacity: var(--hover-opacity);
       }
-      &.active {
+      &--active {
         border-bottom: 2px solid white;
+      }
+      @media (max-width: 979px) {
+        span {
+          display: none;
+        }
       }
     }
   }
 
-  input {
+  &__search-input {
     background: inherit;
     outline: none;
     border: none;
@@ -42,7 +77,7 @@ header {
     color: white;
   }
 
-  .search-container {
+  &__search-container {
     width: 100%;
     gap: 1rem;
     display: flex;
@@ -51,8 +86,28 @@ header {
     padding: 0.5rem 1rem;
     background: inherit;
     border: white 1px solid;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     outline: none;
+
+    button {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      button {
+        display: block;
+      }
+
+      &:has(input[data-mobile-search-open="false"]) {
+        display: none;
+      }
+      &:has(input[data-mobile-search-open="true"]) {
+        display: flex;
+        background: black;
+        max-width: auto;
+        z-index: 100;
+      }
+    }
 
     &:focus-within {
       outline: 2px solid white;

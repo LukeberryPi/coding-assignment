@@ -2,6 +2,9 @@
   --primary-color: #1e1b4b;
   --secondary-color: #000;
   --tertiary-color: #b0a8b9;
+  --hover-opacity: 0.6;
+  --poster-height: 360px;
+  --poster-width: 240px;
   --header-height: 76px;
 }
 
@@ -23,6 +26,7 @@ body {
   color: white;
   height: 100%;
   font-family: Arial, sans-serif;
+  width: 100%;
   background-color: var(--secondary-color);
 }
 

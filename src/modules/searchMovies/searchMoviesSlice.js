@@ -24,7 +24,7 @@ export const searchMovies = createAsyncThunk(
 );
 
 const initialState = {
-  searchMovies: [],
+  searchedMovies: [],
   status: "idle",
   error: null,
 };
@@ -39,7 +39,7 @@ const searchMoviesSlice = createSlice({
         state.status = "loading";
       })
       .addCase(searchMovies.fulfilled, (state, action) => {
-        state.searchMovies = action.payload;
+        state.searchedMovies = action.payload;
         state.status = "succeeded";
       })
       .addCase(searchMovies.rejected, (state, action) => {

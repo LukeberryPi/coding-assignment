@@ -6,13 +6,20 @@
   height: 100%;
   justify-content: center;
   gap: 1rem;
+
+  &__message {
+    padding-inline: 2rem;
+    text-align: center;
+  }
+
   &__anchor {
+    font-weight: bold;
     padding: 0.5rem 1rem;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     background-color: white;
     color: var(--secondary-color);
     &:hover {
-      opacity: 80%;
+      opacity: var(--hover-opacity);
     }
   }
 }

@@ -9,7 +9,11 @@
     no-repeat;
 }
 
-main {
-  padding: var(--header-height);
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: var(--header-height);
   min-height: 100vh;
+  width: 100%;
 }

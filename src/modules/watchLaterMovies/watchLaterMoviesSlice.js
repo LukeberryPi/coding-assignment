@@ -33,44 +33,28 @@ const createWatchLaterThunk = (type) => {
 
   return createAsyncThunk(
     `watchLaterMovies/${typePrefixMap[type]}`,
-    async (movieId, { rejectWithValue }) => {
+    async (movie, { rejectWithValue }) => {
       try {
-        await fetch(url, {
+        const response = await fetch(url, {
           ...options,
           body: JSON.stringify({
             media_type: "movie",
-            media_id: movieId,
+            media_id: movie.id,
             watchlist: boolMap[type],
           }),
         });
-        return movieId;
+
+        if (!response.ok) {
+          throw new Error(`Failed to ${type} movie from Watch Later`);
+        }
+
+        return movie;
       } catch (error) {
         return rejectWithValue(error.message);
       }
     },
   );
 };
-
-export const getWatchLaterMovies = createAsyncThunk(
-  "watchLaterMovies/getWatchLaterMovies",
-  async (pageParam = 1, { rejectWithValue }) => {
-    try {
-      const response = await fetch(
-        `${API_URL}/account/${ACCOUNT_ID}/watchlist/movies?page=${pageParam}`,
-        {
-          headers: {
-            accept: "application/json",
-            Authorization: `Bearer ${BEARER_TOKEN}`,
-          },
-        },
-      );
-      const data = await response.json();
-      return data.results;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  },
-);
 
 export const addWatchLaterMovie = createWatchLaterThunk("add");
 export const removeWatchLaterMovie = createWatchLaterThunk("remove");
@@ -87,23 +71,15 @@ const watchLaterMoviesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getWatchLaterMovies.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(getWatchLaterMovies.fulfilled, (state, action) => {
-        state.watchLaterMovies = action.payload;
-        state.status = "succeeded";
-      })
-      .addCase(getWatchLaterMovies.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload || "Failed to fetch Watch Later movies";
-      })
       .addCase(addWatchLaterMovie.pending, (state) => {
         state.status = "loading";
       })
       .addCase(addWatchLaterMovie.fulfilled, (state, action) => {
-        if (!state.watchLaterMovies.includes(action.payload.movieId)) {
-          state.watchLaterMovies.push(action.payload.movieId);
+        const isDuplicateMovie = state.watchLaterMovies.some(
+          (movie) => movie.id === action.payload.id,
+        );
+        if (!isDuplicateMovie) {
+          state.watchLaterMovies.push(action.payload);
         }
         state.status = "succeeded";
       })
@@ -116,7 +92,7 @@ const watchLaterMoviesSlice = createSlice({
       })
       .addCase(removeWatchLaterMovie.fulfilled, (state, action) => {
         state.watchLaterMovies = state.watchLaterMovies.filter(
-          (movieId) => movieId !== action.payload,
+          (movie) => movie.id !== action.payload.id,
         );
         state.status = "succeeded";
       })

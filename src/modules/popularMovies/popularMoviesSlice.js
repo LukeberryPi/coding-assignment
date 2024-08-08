@@ -15,6 +15,11 @@ export const getPopularMovies = createAsyncThunk(
           },
         },
       );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch popular movies");
+      }
+
       const data = await response.json();
       return data.results;
     } catch (error) {

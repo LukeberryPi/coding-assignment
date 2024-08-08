@@ -1,6 +1,4 @@
-import { useRef, useState } from "react";
-
-import { Clock, Star } from "lucide-react";
+import { Play, Clock, Star } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -11,23 +9,23 @@ import {
   addWatchLaterMovie,
   removeWatchLaterMovie,
 } from "../../../modules/watchLaterMovies/watchLaterMoviesSlice.js";
-import TrailerModal from "../trailerModal/trailerModal.jsx";
 import "./MovieCard.scss";
 
-const MovieCard = ({ movie }) => {
-  const { id, poster_path, title } = movie;
-
+const MovieCard = ({ movie, onPosterClick }) => {
   const dispatch = useDispatch();
   const { favoriteMovies } = useSelector((state) => state.favoriteMovies);
-  const isFavoriteMovie = favoriteMovies.some((favorite) => favorite.id === id);
   const { watchLaterMovies } = useSelector((state) => state.watchLaterMovies);
-  const isWatchLaterMovie = watchLaterMovies.some(
-    (watchLater) => watchLater.id === id,
+  const { poster_path, title } = movie;
+
+  const isFavoriteMovie = favoriteMovies.some(
+    (favoriteMovie) => favoriteMovie.id === movie.id,
   );
 
-  const dialogRef = useRef(null);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [youtubeVideoId, setYoutubeVideoId] = useState("");
+  const isWatchLaterMovie = watchLaterMovies.some(
+    (watchLaterMovie) => watchLaterMovie.id === movie.id,
+  );
+
+  const hasPoster = !!poster_path;
 
   const getImageURL = (poster_path) => {
     return `https://image.tmdb.org/t/p/w500/${poster_path}`;
@@ -35,66 +33,74 @@ const MovieCard = ({ movie }) => {
 
   const handleStarClick = () => {
     if (isFavoriteMovie) {
-      dispatch(removeFavoriteMovie(id));
+      dispatch(removeFavoriteMovie(movie));
       return;
     }
-
-    dispatch(addFavoriteMovie(id));
+    dispatch(addFavoriteMovie(movie));
   };
 
   const handleClockClick = () => {
     if (isWatchLaterMovie) {
-      dispatch(removeWatchLaterMovie(id));
+      dispatch(removeWatchLaterMovie(movie));
       return;
     }
-
-    dispatch(addWatchLaterMovie(id));
-  };
-
-  // @Todo: open modal with trailer dialog
-  const handlePosterClick = () => {
-    dialogRef.current.showModal();
-    setIsDialogOpen(true);
-  };
-
-  const closeDialog = () => {
-    setIsDialogOpen(false);
+    dispatch(addWatchLaterMovie(movie));
   };
 
   return (
-    <>
-      {isDialogOpen && (
-        <TrailerModal
-          movieTitle={title}
-          youtubeVideoId={youtubeVideoId}
-          closeModal={setIsDialogOpen}
-          ref={dialogRef}
-          onClose={closeDialog}
-        />
-      )}
-      <div className="movie-card">
-        <button onClick={handlePosterClick}>
+    <div className="movie-card">
+      <button
+        onClick={() => onPosterClick(movie)}
+        className="movie-card__poster-button"
+      >
+        {isFavoriteMovie && (
+          <Star
+            className="movie-card__icon movie-card__icon--top-left"
+            fill="orange"
+            color="orange"
+          />
+        )}
+        {isWatchLaterMovie && (
+          <Clock
+            className="movie-card__icon movie-card__icon--top-right"
+            color="blueviolet"
+          />
+        )}
+        {hasPoster ? (
           <img
             className="movie-card__image"
             src={getImageURL(poster_path)}
             alt={`${title} poster`}
           />
-        </button>
+        ) : (
+          <div className="movie-card__poster-placeholder">No poster found</div>
+        )}
+        <div className="movie-card__overlay">
+          <Play />
+          <span>View Trailer</span>
+        </div>
+      </button>
+      <div className="movie-card__details-container">
         <div className="movie-card__title-container">
           <p className="movie-card__title">{title}</p>
         </div>
         <div className="movie-card__actions">
           <button onClick={handleStarClick}>
-            <Star />
+            <Star
+              fill={isFavoriteMovie ? "orange" : "none"}
+              style={{ color: `${isFavoriteMovie ? "orange" : "white"}` }}
+            />
             <span>{isFavoriteMovie ? "Remove" : "Add"}</span>
           </button>
           <button onClick={handleClockClick}>
-            <Clock />
+            <Clock
+              style={{ color: `${isWatchLaterMovie ? "blueviolet" : "white"}` }}
+            />
             <span>{isWatchLaterMovie ? "Remove" : "Add"}</span>
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
