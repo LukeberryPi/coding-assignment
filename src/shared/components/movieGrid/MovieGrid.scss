@@ -28,6 +28,7 @@
 
   &__title {
     font-size: clamp(3rem, 5vw, 4rem);
+    padding-inline: 1rem;
     font-weight: bold;
     text-align: center;
   }
