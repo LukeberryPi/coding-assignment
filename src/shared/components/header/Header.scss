@@ -89,7 +89,15 @@
     border-radius: 0.5rem;
     outline: none;
 
+    button {
+      display: none;
+    }
+
     @media (max-width: 768px) {
+      button {
+        display: block;
+      }
+
       &:has(input[data-mobile-search-open="false"]) {
         display: none;
       }
