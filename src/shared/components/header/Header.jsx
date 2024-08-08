@@ -1,25 +1,20 @@
 import { useState, useEffect } from "react";
 
-import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Clock, Film, Search, Star, X } from "lucide-react";
 
-import useDebounce from "../../hooks/useDebounce";
 import "./Header.scss";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
-  const debouncedSearchQuery = useDebounce(searchQuery || "", 600);
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
-    if (debouncedSearchQuery) {
-      navigate(`/search?q=${encodeURIComponent(debouncedSearchQuery)}`);
-    } else if (location.pathname === "/search" && !searchQuery) {
-      navigate("/");
+    if (searchQuery) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
     }
-  }, [debouncedSearchQuery, navigate, location.pathname, searchQuery]);
+  }, [navigate, searchQuery]);
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
@@ -63,7 +58,7 @@ const Header = () => {
             aria-labelledby="search-movies"
           />
           <button onClick={toggleMobileSearch}>
-            <X />
+            Close
           </button>
         </div>
 

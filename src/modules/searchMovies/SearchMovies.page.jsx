@@ -8,20 +8,22 @@ import LoadingState from "../../shared/components/loadingState/LoadingState.jsx"
 import ErrorState from "../../shared/components/errorState/ErrorState.jsx";
 
 import { searchMovies } from "./searchMoviesSlice.js";
+import useDebounce from "../../shared/hooks/useDebounce.js";
 
 const SearchMoviesPage = () => {
+  const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("q");
-  const dispatch = useDispatch();
+  const debouncedQuery = useDebounce(searchQuery, 400);
   const { searchedMovies, status, error } = useSelector(
     (state) => state.searchedMovies,
   );
 
   useEffect(() => {
-    if (searchQuery) {
-      dispatch(searchMovies(searchQuery));
+    if (debouncedQuery) {
+      dispatch(searchMovies(debouncedQuery));
     }
-  }, [searchQuery, dispatch]);
+  }, [debouncedQuery, dispatch]);
 
   if (status === "loading") {
     return <LoadingState />;

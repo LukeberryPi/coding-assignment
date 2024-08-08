@@ -17,10 +17,6 @@ const MovieGrid = ({ movies, title, emptyStateMessage }) => {
   const openTrailerModal = async (movie) => {
     setSelectedMovie(movie);
     const trailerKey = await getMovieTrailer(movie.id);
-    if (!trailerKey) {
-      console.error("No trailer found for this movie");
-      return;
-    }
     setSelectedMovie({ ...movie, youtubeVideoId: trailerKey });
     setIsDialogOpen(true);
   };
