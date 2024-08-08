@@ -5,6 +5,8 @@
   border-radius: 0.5rem;
   overflow: hidden;
   background-color: black;
+  display: flex;
+  flex-direction: column;
 
   &__poster-button {
     position: relative;
@@ -73,16 +75,14 @@
 
   &__title {
     font-size: 1.2rem;
-    line-clamp: 1;
-    text-overflow: ellipsis;
     font-weight: bold;
     margin-block: 1rem;
-    margin-bottom: 0;
   }
 
   &__actions {
     display: flex;
     padding-block: 0.5rem;
+    margin-top: auto;
 
     button {
       flex: 1;
