@@ -7,7 +7,7 @@ import watchLaterMoviesReducer, {
 
 global.fetch = jest.fn();
 
-describe("watch later movies slice", () => {
+describe("favorite movies slice", () => {
   let store;
 
   beforeEach(() => {
