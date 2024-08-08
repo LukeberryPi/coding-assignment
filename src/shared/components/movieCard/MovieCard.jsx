@@ -17,11 +17,11 @@ const MovieCard = ({ movie, onPosterClick }) => {
   const { watchLaterMovies } = useSelector((state) => state.watchLaterMovies);
   const { poster_path, title } = movie;
 
-  const isFavoriteMovie = favoriteMovies?.some(
+  const isFavoriteMovie = favoriteMovies.some(
     (favoriteMovie) => favoriteMovie.id === movie.id,
   );
 
-  const isWatchLaterMovie = watchLaterMovies?.some(
+  const isWatchLaterMovie = watchLaterMovies.some(
     (watchLaterMovie) => watchLaterMovie.id === movie.id,
   );
 

@@ -40,14 +40,13 @@ const MovieGrid = ({ movies, title, emptyStateMessage }) => {
         <h2 className="movie-grid__title">{title}</h2>
       </div>
       <div className="movie-grid">
-        {movies.length > 0 &&
-          movies.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              movie={movie}
-              onPosterClick={() => openTrailerModal(movie)}
-            />
-          ))}
+        {movies.map((movie) => (
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+            onPosterClick={() => openTrailerModal(movie)}
+          />
+        ))}
       </div>
       {selectedMovie && (
         <TrailerModal

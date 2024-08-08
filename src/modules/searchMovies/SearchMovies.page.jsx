@@ -1,10 +1,13 @@
 import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+
 import MovieGrid from "../../shared/components/movieGrid/MovieGrid.jsx";
-import { searchMovies } from "./searchMoviesSlice.js";
 import LoadingState from "../../shared/components/loadingState/LoadingState.jsx";
 import ErrorState from "../../shared/components/errorState/ErrorState.jsx";
+
+import { searchMovies } from "./searchMoviesSlice.js";
 
 const SearchMoviesPage = () => {
   const [searchParams] = useSearchParams();

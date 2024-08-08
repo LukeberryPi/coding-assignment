@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import { Clock, Film, Search, Star } from "lucide-react";
+
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
+import { Clock, Film, Search, Star } from "lucide-react";
+
 import useDebounce from "../../hooks/useDebounce";
 import "./Header.scss";
 
