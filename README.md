@@ -4,6 +4,10 @@ React + Redux + RTK + Bootstrap application that fetches movies from [https://ww
 
 Created with [Create React App](https://github.com/facebook/create-react-app).
 
+## Access in production
+
+This is the link to access the app in production: [luke-berry-movieland.vercel.app](luke-berry-movieland.vercel.app)
+
 ## How to run locally
 
 1. Fork this repository
@@ -12,7 +16,7 @@ Created with [Create React App](https://github.com/facebook/create-react-app).
 
 You will need a valid `.env` file to run this project locally.
 
-It should be in the following format:
+It should be in the following format. I used v3 of the TMDB API:
 
 ```
 REACT_APP_API_URL=https://api.themoviedb.org/3
@@ -23,8 +27,8 @@ REACT_APP_BEARER_TOKEN=<your-bearer-token-here>
 For this you must:
 
 4. Create an account on [https://www.themoviedb.org/](https://www.themoviedb.org/)
-5. Access the [API keys](https://www.themoviedb.org/settings/api) to get your Bearer Token
-6. Follow the steps [here](https://www.themoviedb.org/talk/605cbdda8f26bc002a612929#605e51579a64350054ff8c63) to get your Account ID
+5. Access the [API keys](https://www.themoviedb.org/settings/api) to get your `Bearer Token`
+6. Follow the steps [here](https://www.themoviedb.org/talk/605cbdda8f26bc002a612929#605e51579a64350054ff8c63) to get your `Account ID`
 
 Now, create a `.env` file and place it in the root of the project, and you're done!
 
