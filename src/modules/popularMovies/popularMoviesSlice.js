@@ -31,7 +31,7 @@ export const getPopularMovies = createAsyncThunk(
 
 const initialState = {
   popularMovies: [],
-  totalPages: null,
+  totalPages: 0,
   currentPage: 1,
   hasMore: true,
   status: "idle",

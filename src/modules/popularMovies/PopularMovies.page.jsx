@@ -1,11 +1,6 @@
 import { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-  BEARER_TOKEN,
-  API_URL,
-  ACCOUNT_ID,
-} from "../../shared/utils/constants";
 
 import ErrorState from "../../shared/components/errorState/ErrorState.jsx";
 import MovieGrid from "../../shared/components/movieGrid/MovieGrid.jsx";
@@ -24,7 +19,6 @@ const PopularMoviesPage = () => {
 
   useEffect(() => {
     if (popularMovies.length === 0 && !isLoading) {
-      console.log(BEARER_TOKEN, ACCOUNT_ID, API_URL);
       dispatch(getPopularMovies(currentPage));
     } else if (hasReachedBottom && hasMore && !isLoading) {
       dispatch(getPopularMovies(currentPage + 1));
